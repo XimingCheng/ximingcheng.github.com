@@ -30,7 +30,37 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://getnikola.com/categories/c.html</loc>
+  <lastmod>2013-12-22</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://getnikola.com/categories/index.html</loc>
+  <lastmod>2013-12-22</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://getnikola.com/categories/nei-cun-xie-lu-c-visualleak-detector-valgrind.html</loc>
+  <lastmod>2013-12-22</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://getnikola.com/categories/nei-cun-xie-lu-cvisualleak-detectorvalgrind.html</loc>
+  <lastmod>2013-12-22</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://getnikola.com/categories/nei-cun-xie-lu.html</loc>
+  <lastmod>2013-12-22</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://getnikola.com/categories/valgrind.html</loc>
+  <lastmod>2013-12-22</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://getnikola.com/categories/visualleak-detector.html</loc>
   <lastmod>2013-12-22</lastmod>
   <priority>0.5000</priority>
  </url>

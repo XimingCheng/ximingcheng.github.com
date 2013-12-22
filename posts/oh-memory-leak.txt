@@ -1,6 +1,6 @@
 .. link: 
 .. description: 
-.. tags: 
+.. tags: 内存泄露,C++,VisualLeak Detector,valgrind
 .. date: 2012/11/18 00:31:01
 .. title: 内存泄露，我擦
 .. slug: oh-memory-leak
