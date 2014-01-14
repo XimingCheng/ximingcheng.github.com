@@ -20,6 +20,16 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://getnikola.com/2013/</loc>
+  <lastmod>2014-01-14</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://getnikola.com/2013/index.html</loc>
+  <lastmod>2014-01-14</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://getnikola.com/archive.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
@@ -36,6 +46,11 @@
  </url>
  <url>
   <loc>http://getnikola.com/categories/cu.html</loc>
+  <lastmod>2014-01-14</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://getnikola.com/categories/github-project.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
@@ -70,6 +85,11 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://getnikola.com/categories/wxwidgets.html</loc>
+  <lastmod>2014-01-14</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://getnikola.com/galleries/</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
@@ -100,6 +120,16 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://getnikola.com/galleries/wxWidgets-UI/</loc>
+  <lastmod>2014-01-14</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://getnikola.com/galleries/wxWidgets-UI/index.html</loc>
+  <lastmod>2014-01-14</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://getnikola.com/index.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
@@ -121,6 +151,11 @@
  </url>
  <url>
   <loc>http://getnikola.com/posts/oh-memory-leak.html</loc>
+  <lastmod>2014-01-14</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://getnikola.com/posts/wxWidgets-UI.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>

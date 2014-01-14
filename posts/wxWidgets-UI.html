@@ -1,0 +1,295 @@
+<!DOCTYPE html><html lang="zh_cn">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="程光曦微">
+    <title>wxWidgets wxListCtrl与多线程UI更新 | 程光曦微</title>
+    
+            <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+            <link href="../assets/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/theme.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+    
+
+
+
+    
+</head>
+<body>
+<!-- Menubar -->
+<div class="navbar navbar-fixed-top" id="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+
+            <a class="brand" href="../">
+            程光曦微
+            </a>
+            <!-- Everything you want hidden at 940px or less, place within here -->
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    
+                <li><a href="../archive.html">归档</a>
+                </li><li><a href="../categories/index.html">标签</a>
+                </li><li><a href="../galleries/index.html">图集</a>
+                </li><li><a href="../galleries/index.html">关于作者</a>
+                </li><li><a href="../rss.xml">RSS</a>
+
+                </li></ul>
+                <ul class="nav pull-right">
+                
+                
+                    <li>
+			<a href="wxWidgets-UI.md" id="sourcelink">源代码</a>
+		</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Menubar -->
+<div class="container-fluid" id="container-fluid">
+    <!--Body content-->
+    <div class="row-fluid">
+    <div class="span2"></div>
+    <div class="span8">
+    
+    <div class="postbox">
+    
+    <h1>wxWidgets wxListCtrl与多线程UI更新</h1>
+
+    <hr>
+    <small>
+        发表于: <time class="published" datetime="2013-05-31T20:10:06">2013-05-31 20:10</time>
+        
+
+		
+          |  更多相关文章：
+            <a class="tag" href="../categories/wxwidgets.html"><span class="badge badge-info">wxWidgets</span></a>
+            <a class="tag" href="../categories/hevc.html"><span class="badge badge-info">HEVC</span></a>
+            <a class="tag" href="../categories/github-project.html"><span class="badge badge-info">Github Project</span></a>
+
+          |  
+		
+    </small>
+    <hr>
+    <p>很久没有编写GUI程序了，还是在本科的时候经常编写MFC程序，现在觉得作为一个IT人士，必须每隔上一段时间学习新的技术，否则会被淘汰。所以，我看了看wxWidgets这个号称跨平台的GUI库。</p>
+<p>主要的目标是实现一个HEVC的码流分析器（<a href="https://github.com/XimingCheng/HEVCAnalyzer">HEVCAnalyzer</a>），这是一个长远的目标，估计要花上很长时间才能把功能完善，毕竟是我和一个同学在课余时间开发，而且目前遇到了很多的问题，我把这个星期我这方面遇到的问题总结一下，记录在此。</p>
+<p>wxWidgets的使用我就不多说了，我的第一个目标就是编写一个YUV分析器，利用到了wxWidgets的AUI布局，下面是我的一个布局的草图：</p>
+<p><img alt="image" src="../galleries/wxWidgets-UI/design.jpg"></p>
+<p>关于AUI布局，他是一个高级的布局管理，其中包含的属性Layers, Rows and Directions, Positions可以控制子窗口的位置，官方给了一个例子，效果如下（个别布局被我修改过）</p>
+<p><img alt="image" src="../galleries/wxWidgets-UI/demo.jpg"></p>
+<p>所以我开始给我的项目程序设计了成了这个样子：</p>
+<p><img alt="image" src="../galleries/wxWidgets-UI/UI1.jpg"></p>
+<p>其中左侧是YUV的缩率图列表使用了wxListCrtl，打开之后效果如下：</p>
+<p><img alt="image" src="../galleries/wxWidgets-UI/UI2.jpg"></p>
+<p>其中这里使用了多线程更新UI，主要是因为如果YUV文件过大，打开处理时间过长，用户会感觉UI被卡死。使用线程控制UI更新，但是线程里面不能直接更新UI，目前是使用自定义消息发给父窗口，父窗口处理列表的更新：</p>
+<p>启动线程：</p>
+<div class="code"><pre><span class="k">if</span><span class="p">(</span><span class="n">m_pImage_list</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">delete</span> <span class="n">m_pImage_list</span><span class="p">;</span>
+    <span class="n">m_pImage_list</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">m_pImage_list</span> <span class="o">=</span> <span class="n">new</span> <span class="n">wxImageList</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">m_iSourceWidth</span><span class="o">*</span><span class="n">scaleRate</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">m_iSourceHeight</span><span class="o">*</span><span class="n">scaleRate</span><span class="p">);</span>
+<span class="n">m_pThumbnalList</span><span class="o">-&gt;</span><span class="n">SetImageList</span><span class="p">(</span><span class="n">m_pImage_list</span><span class="p">,</span> <span class="n">wxIMAGE_LIST_NORMAL</span><span class="p">);</span>
+<span class="n">m_pThumbThread</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ThumbnailThread</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">m_pImage_list</span><span class="p">,</span> <span class="n">m_iSourceWidth</span><span class="p">,</span> <span class="n">m_iSourceHeight</span><span class="p">,</span> <span class="n">bit</span><span class="p">,</span> <span class="n">sfile</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">m_pThumbThread</span><span class="o">-&gt;</span><span class="n">Create</span><span class="p">()</span> <span class="o">!=</span> <span class="n">wxTHREAD_NO_ERROR</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">wxLogError</span><span class="p">(</span><span class="n">wxT</span><span class="p">(</span><span class="s">"Can't create the thread!"</span><span class="p">));</span>
+    <span class="n">delete</span> <span class="n">m_pThumbThread</span><span class="p">;</span>
+    <span class="n">m_pThumbThread</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">m_pThumbThread</span><span class="o">-&gt;</span><span class="n">Run</span><span class="p">()</span> <span class="o">!=</span> <span class="n">wxTHREAD_NO_ERROR</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">wxLogError</span><span class="p">(</span><span class="n">wxT</span><span class="p">(</span><span class="s">"Can't create the thread!"</span><span class="p">));</span>
+        <span class="n">delete</span> <span class="n">m_pThumbThread</span><span class="p">;</span>
+        <span class="n">m_pThumbThread</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>线程中处理YUV to RGB转换：</p>
+<div class="code"><pre><span class="kt">void</span><span class="o">*</span> <span class="n">ThumbnailThread</span><span class="o">::</span><span class="n">Entry</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">m_pImageList</span><span class="o">-&gt;</span><span class="n">RemoveAll</span><span class="p">();</span>
+    <span class="n">TVideoIOYuv</span> <span class="n">cYUVIO</span><span class="p">;</span>
+    <span class="n">cYUVIO</span><span class="p">.</span><span class="n">open</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">m_sYUVPath</span><span class="p">.</span><span class="n">mb_str</span><span class="p">(</span><span class="n">wxConvUTF8</span><span class="p">).</span><span class="n">data</span><span class="p">(),</span> <span class="nb">false</span><span class="p">,</span> <span class="n">m_iYUVBit</span><span class="p">,</span> <span class="n">m_iYUVBit</span><span class="p">,</span> <span class="n">m_iYUVBit</span><span class="p">,</span> <span class="n">m_iYUVBit</span><span class="p">);</span>
+    <span class="n">TComPicYuv</span><span class="o">*</span> <span class="n">pcPicYuvOrg</span> <span class="o">=</span> <span class="n">new</span> <span class="n">TComPicYuv</span><span class="p">;</span>
+    <span class="n">pcPicYuvOrg</span><span class="o">-&gt;</span><span class="n">create</span><span class="p">(</span> <span class="n">m_iSourceWidth</span><span class="p">,</span> <span class="n">m_iSourceHeight</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">4</span> <span class="p">);</span>
+
+    <span class="n">wxBitmap</span> <span class="nf">bmp</span><span class="p">(</span><span class="n">m_iSourceWidth</span><span class="p">,</span> <span class="n">m_iSourceHeight</span><span class="p">,</span> <span class="mi">24</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">frame</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">cYUVIO</span><span class="p">.</span><span class="n">isEof</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">TestDestroy</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">pad</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+        <span class="n">cYUVIO</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">pcPicYuvOrg</span><span class="p">,</span> <span class="n">pad</span><span class="p">);</span>
+        <span class="n">wxNativePixelData</span> <span class="nf">img</span><span class="p">(</span><span class="n">bmp</span><span class="p">);</span>
+        <span class="n">wxNativePixelData</span><span class="o">::</span><span class="n">Iterator</span> <span class="n">p</span><span class="p">(</span><span class="n">img</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m_iSourceHeight</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">wxNativePixelData</span><span class="o">::</span><span class="n">Iterator</span> <span class="n">rowStart</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+            <span class="n">Pel</span><span class="o">*</span> <span class="n">pY</span> <span class="o">=</span> <span class="n">pcPicYuvOrg</span><span class="o">-&gt;</span><span class="n">getLumaAddr</span><span class="p">()</span> <span class="o">+</span> <span class="n">j</span><span class="o">*</span><span class="n">pcPicYuvOrg</span><span class="o">-&gt;</span><span class="n">getStride</span><span class="p">();</span>
+            <span class="n">Pel</span><span class="o">*</span> <span class="n">pU</span> <span class="o">=</span> <span class="n">pcPicYuvOrg</span><span class="o">-&gt;</span><span class="n">getCbAddr</span><span class="p">()</span>   <span class="o">+</span> <span class="p">(</span><span class="n">j</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">pcPicYuvOrg</span><span class="o">-&gt;</span><span class="n">getCStride</span><span class="p">();</span>
+            <span class="n">Pel</span><span class="o">*</span> <span class="n">pV</span> <span class="o">=</span> <span class="n">pcPicYuvOrg</span><span class="o">-&gt;</span><span class="n">getCrAddr</span><span class="p">()</span>   <span class="o">+</span> <span class="p">(</span><span class="n">j</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">pcPicYuvOrg</span><span class="o">-&gt;</span><span class="n">getCStride</span><span class="p">();</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m_iSourceWidth</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="c1">// YUV to RBG转换</span>
+                <span class="c1">//此处省略, 具体可以参见Github项目中详细处理</span>
+            <span class="p">}</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">rowStart</span><span class="p">;</span>
+            <span class="n">p</span><span class="p">.</span><span class="n">OffsetY</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">//bmp.SaveFile(_("test.bmp"), wxBITMAP_TYPE_BMP);</span>
+        <span class="n">wxImage</span> <span class="n">bimg</span> <span class="o">=</span> <span class="n">bmp</span><span class="p">.</span><span class="n">ConvertToImage</span><span class="p">();</span>
+        <span class="kt">double</span> <span class="n">scaleRate</span> <span class="o">=</span> <span class="mf">165.0</span><span class="o">/</span><span class="n">m_iSourceWidth</span><span class="p">;</span>
+        <span class="n">wxImage</span> <span class="n">simg</span> <span class="o">=</span> <span class="n">bimg</span><span class="p">.</span><span class="n">Scale</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">m_iSourceWidth</span><span class="o">*</span><span class="n">scaleRate</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">m_iSourceHeight</span><span class="o">*</span><span class="n">scaleRate</span><span class="p">);</span>
+        <span class="n">wxBitmap</span> <span class="nf">newbmp</span><span class="p">(</span><span class="n">simg</span><span class="p">);</span>
+        <span class="n">m_pImageList</span><span class="o">-&gt;</span><span class="n">Add</span><span class="p">(</span><span class="n">newbmp</span><span class="p">);</span>
+        <span class="n">wxCommandEvent</span> <span class="nf">event</span><span class="p">(</span><span class="n">wxEVT_ADDANIMAGE_THREAD</span><span class="p">,</span> <span class="n">wxID_ANY</span><span class="p">);</span>
+        <span class="n">event</span><span class="p">.</span><span class="n">SetInt</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span>
+        <span class="c1">//m_pFrame-&gt;ProcessEvent(event);</span>
+        <span class="c1">// this method can be used in Linux</span>
+        <span class="n">wxPostEvent</span><span class="p">(</span><span class="n">m_pFrame</span><span class="p">,</span> <span class="n">event</span><span class="p">);</span>
+        <span class="n">frame</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">pcPicYuvOrg</span><span class="o">-&gt;</span><span class="n">destroy</span><span class="p">();</span>
+    <span class="n">delete</span> <span class="n">pcPicYuvOrg</span><span class="p">;</span>
+    <span class="n">pcPicYuvOrg</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">wxCommandEvent</span> <span class="nf">event</span><span class="p">(</span><span class="n">wxEVT_END_THREAD</span><span class="p">,</span> <span class="n">wxID_ANY</span><span class="p">);</span>
+    <span class="n">wxPostEvent</span><span class="p">(</span><span class="n">m_pFrame</span><span class="p">,</span> <span class="n">event</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">wxThread</span><span class="o">::</span><span class="n">ExitCode</span><span class="p">)</span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>自定义消息处理函数（父窗口）：</p>
+<div class="code"><pre><span class="kt">void</span> <span class="n">MainFrame</span><span class="o">::</span><span class="n">OnThreadAddImage</span><span class="p">(</span><span class="n">wxCommandEvent</span><span class="o">&amp;</span> <span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">event</span><span class="p">.</span><span class="n">GetInt</span><span class="p">();</span>
+<span class="c1">//    wxString str;</span>
+<span class="c1">//    str.Printf(wxT("frame %d added"), frame);</span>
+<span class="c1">//    wxMessageBox(str);</span>
+    <span class="n">wxListItem</span> <span class="n">item</span><span class="p">;</span>
+    <span class="n">item</span><span class="p">.</span><span class="n">SetId</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span>
+    <span class="n">wxString</span> <span class="n">text</span><span class="p">;</span>
+    <span class="n">text</span><span class="p">.</span><span class="n">Printf</span><span class="p">(</span><span class="n">wxT</span><span class="p">(</span><span class="s">"POC %d"</span><span class="p">),</span> <span class="n">frame</span><span class="p">);</span>
+    <span class="n">item</span><span class="p">.</span><span class="n">SetText</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+    <span class="n">item</span><span class="p">.</span><span class="n">SetImage</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span>
+    <span class="n">m_pThumbnalList</span><span class="o">-&gt;</span><span class="n">InsertItem</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>遇到的问题:</p>
+<p>1 Linux的wxThread估计有问题 ，无法启动线程</p>
+<p><img alt="image" src="../galleries/wxWidgets-UI/crash.jpg"></p>
+<p>解决方法：</p>
+<p>在wxApp的子类的构造函数添加线程初始化函数 XInitThreads();</p>
+<div class="code"><pre><span class="n">class</span> <span class="n">HEVCodecApp</span> <span class="o">:</span> <span class="n">public</span> <span class="n">wxApp</span>
+<span class="p">{</span>
+<span class="nl">public:</span>
+<span class="cp">#if defined(__UNIX__)</span>
+    <span class="n">HEVCodecApp</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">XInitThreads</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="cp">#endif</span>
+    <span class="kt">bool</span> <span class="n">OnInit</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+
+
+<p>参考 <a href="http://forums.wxwidgets.org/viewtopic.php?t=32346&amp;p=139431">http://forums.wxwidgets.org/viewtopic.php?t=32346&amp;p=139431</a></p>
+<p>2 wxListCtrl在Linux下面显示有问题，无法单列显示列表，这个是wxWidgets 2.8.12的bug，其例子也有这个bug：</p>
+<p><img alt="image" src="../galleries/wxWidgets-UI/bug.jpg"></p>
+<p>我们打算使用wxHTMLListBox来解决这个bug</p>
+    
+    <ul class="pager">
+        <li class="previous">
+            <a href="HEVC-basic-CU-learning.html">← 前一篇</a>
+        </li>
+    </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        var disqus_shortname ="nikolademo";
+            var disqus_url="http://getnikola.com//posts/wxWidgets-UI.html";
+        var disqus_title="wxWidgets wxListCtrl\u4e0e\u591a\u7ebf\u7a0bUI\u66f4\u65b0";
+        var disqus_identifier="cache\posts\wxWidgets-UI.html";
+        var disqus_config = function () {
+            this.language = "zh_cn";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </div>
+
+    </div>
+    </div>
+    <!--End of body content-->
+</div>
+<div class="footerbox">
+    Contents © 2014         <a href="mailto:chengximing1989@gmail.com">程光曦微</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+</div>
+
+            <script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+            <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+
+	
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});
+    $(window).on('hashchange', function(){
+        if (location.hash && $(location.hash)[0]) {
+            $('body').animate({scrollTop: $(location.hash).offset().top - $('#navbar').outerHeight(true)*1.2 }, 1);
+        }
+    });
+    $(document).ready(function(){$(window).trigger('hashchange')});
+    </script>
+   
+   
+</body>
+</html>
