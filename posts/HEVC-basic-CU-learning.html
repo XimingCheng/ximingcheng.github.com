@@ -3,23 +3,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta charset="utf-8">
-    <meta name="description" content="打酱油的码农">
+    <meta name="description" content="">
     <meta name="author" content="程光曦微">
-    <title>程光曦微 | 程光曦微</title>
+    <title>HEVC学习之CU划分小实验 | 程光曦微</title>
     
-            <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-            <link href="assets/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
-        <link href="assets/css/rst.css" rel="stylesheet" type="text/css">
-        <link href="assets/css/code.css" rel="stylesheet" type="text/css">
-        <link href="assets/css/colorbox.css" rel="stylesheet" type="text/css">
-        <link href="assets/css/theme.css" rel="stylesheet" type="text/css">
+            <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+            <link href="../assets/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/theme.css" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
     <![endif]-->
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 
     
-    
+
+
+
     
 </head>
 <body>
@@ -35,24 +37,26 @@
             <span class="icon-bar"></span>
         </a>
 
-            <a class="brand" href=".">
+            <a class="brand" href="../">
             程光曦微
             </a>
             <!-- Everything you want hidden at 940px or less, place within here -->
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     
-                <li><a href="archive.html">归档</a>
-                </li><li><a href="categories/index.html">标签</a>
-                </li><li><a href="galleries/index.html">图集</a>
-                </li><li><a href="galleries/index.html">关于作者</a>
-                </li><li><a href="rss.xml">RSS</a>
+                <li><a href="../archive.html">归档</a>
+                </li><li><a href="../categories/index.html">标签</a>
+                </li><li><a href="../galleries/index.html">图集</a>
+                </li><li><a href="../galleries/index.html">关于作者</a>
+                </li><li><a href="../rss.xml">RSS</a>
 
                 </li></ul>
                 <ul class="nav pull-right">
                 
                 
                     <li>
+			<a href="HEVC-basic-CU-learning.md" id="sourcelink">源代码</a>
+		</li>
                 </ul>
             </div>
         </div>
@@ -65,14 +69,27 @@
     <div class="span2"></div>
     <div class="span8">
     
-        <div class="postbox">
-        <h1><a href="posts/HEVC-basic-CU-learning.html">HEVC学习之CU划分小实验</a>
-        <small>  
-             发表于: <time class="published" datetime="2012-12-16T20:36:15">2012-12-16 20:36</time>
-        </small></h1>
-        <hr>
-        <p>HEVC的CU的概念相信每个搞HEVC的童鞋都很清楚，但是怎么才能让HEVC的CU划分更加直观的表现出来呢，每次调试程序我的心中都有着下面这幅图，可是，我想把它直观的表现出来！谁叫咱智商不行，还是个没有用的程序猿，以后也毕不了业，也找不到工作呢！</p>
-<p><img alt="image" src="galleries/HEVC-CU/cu.jpg"></p>
+    <div class="postbox">
+    
+    <h1>HEVC学习之CU划分小实验</h1>
+
+    <hr>
+    <small>
+        发表于: <time class="published" datetime="2012-12-16T20:36:15">2012-12-16 20:36</time>
+        
+
+		
+          |  更多相关文章：
+            <a class="tag" href="../categories/hevc.html"><span class="badge badge-info">HEVC</span></a>
+            <a class="tag" href="../categories/video-coding.html"><span class="badge badge-info">Video Coding</span></a>
+            <a class="tag" href="../categories/cu.html"><span class="badge badge-info">CU</span></a>
+
+          |  
+		
+    </small>
+    <hr>
+    <p>HEVC的CU的概念相信每个搞HEVC的童鞋都很清楚，但是怎么才能让HEVC的CU划分更加直观的表现出来呢，每次调试程序我的心中都有着下面这幅图，可是，我想把它直观的表现出来！谁叫咱智商不行，还是个没有用的程序猿，以后也毕不了业，也找不到工作呢！</p>
+<p><img alt="image" src="../galleries/HEVC-CU/cu.jpg"></p>
 <p>好了，废话不多说，咱们不搞理论的，没有太多废话！基于HM 9.0</p>
 <p>要想实际的打出CU划分的最终结果，我想了一个办法，就是修改HEVC的decoder，在CU最终划分的结果的地方把像素换成一个特殊值，比如luma改成0，就变成黑色的了。</p>
 <p>怎么改呢，我代码才看了没多久，只好先研究一下decoder：</p>
@@ -134,7 +151,7 @@
 
 
 <p>可以明显看出这一个CU的划分是如下结果：</p>
-<p><img alt="image" src="galleries/HEVC-CU/LCU1.jpg"></p>
+<p><img alt="image" src="../galleries/HEVC-CU/LCU1.jpg"></p>
 <p>于是我就想个办法把每个小块的的两个坐标点存下来不就好了吗，于是在typedef.h我添加了如下代码：</p>
 <div class="code"><pre><span class="c1">//cheng </span>
 <span class="k">struct</span> <span class="n">PtPair</span>
@@ -226,7 +243,7 @@
 
 
 <p>解码一帧图像使用YUV播放器查看效果：</p>
-<p><img alt="image" src="galleries/HEVC-CU/result1.jpg"></p>
+<p><img alt="image" src="../galleries/HEVC-CU/result1.jpg"></p>
 <p>怎么办呢，在TDecSlice::decompressSlice函数里面添加一个类似的vector记录一下LCU，在class TDecSlice里面再添加一个私有成员std::vector<ptpair>m_listLCU;，TDecSlice::decompressSlice函数开始的地方清空vector：m_listLastCU.clear();</ptpair></p>
 <p>在LCU的大大的for循环里面添加代码记录LCU划分的信息：</p>
 <div class="code"><pre><span class="n">UInt</span> <span class="n">xpel</span> <span class="o">=</span> <span class="n">pcCU</span><span class="o">-&gt;</span><span class="n">getCUPelX</span><span class="p">();</span>
@@ -258,116 +275,44 @@
 
 
 <p>运行解码器再试一下：</p>
-<p><img alt="image" src="galleries/HEVC-CU/result2.jpg"></p>
+<p><img alt="image" src="../galleries/HEVC-CU/result2.jpg"></p>
 <p>你可以很明显的看到LCU的大白色块！哈哈！</p>
 <p>后面其实你可以发现：</p>
-<p><img alt="image" src="galleries/HEVC-CU/LCU1.jpg"></p>
+<p><img alt="image" src="../galleries/HEVC-CU/LCU1.jpg"></p>
 <p>和这个一模一样</p>
-<p><img alt="image" src="galleries/HEVC-CU/LCU2.jpg"></p>
+<p><img alt="image" src="../galleries/HEVC-CU/LCU2.jpg"></p>
 <p>注：以上画框的结果只能适用于I帧，对于P/B帧，由于解码我修改重建值也就修改了了P/B参考帧的像素值，导致P/B帧画框会出现一定混乱，不过对于P/B帧，vector里面存放的数据应该是对的！</p>
-            
-        
-    <p>
-        <a href="posts/HEVC-basic-CU-learning.html#disqus_thread" data-disqus-identifier="cache\posts\HEVC-basic-CU-learning.html">Comments</a>
-
-
-        </p></div>
-        <div class="postbox">
-        <h1><a href="posts/oh-memory-leak.html">内存泄露，我擦</a>
-        <small>  
-             发表于: <time class="published" datetime="2012-11-18T00:31:01">2012-11-18 00:31</time>
-        </small></h1>
-        <hr>
-        <!-- 
-.. link: 
-.. description: 
-.. tags: 内存泄露,C++,VisualLeak Detector,valgrind
-.. date: 2012/11/18 00:31:01
-.. title: 内存泄露，我擦
-.. slug: oh-memory-leak
--->
-
-<p>在这个快节奏的环境下，男人怕泄，女人怕漏。一个C/C++程序猿怕啥呢——泄露。下面是我从别的地方摘录的一段[1]。</p>
-<p>“C/C++编译的程序的内存分配分为以下几个部分：栈区（stack）——由编译器自动分配释放，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈。堆区（heap）——一般由程序员分配释放，若程序员不释放，程序结束时可能由OS回收。注意它与数据结构中的堆是两回事，分配方式倒是类似于链表。全局区（静态区）（static）——全局变量和静态变量的存储是放在一块的，初始化的全局变量和静态变量在一块区域，未初始化的全局变量和未初始化的静态变量在相邻的另一块区域。程序结束后由系统释放。文字常量区——常量字符串就是放在这里的，程序结束后由系统释放。程序代码区——存放函数体的二进制代码。”</p>
-<p>Memory Leak中文翻译为内存泄露，这是一个令人头疼的话题，因为由程序猿手动动态分配的内存一般都在heap上，这个蛋疼的东西总困扰着C/C++程序猿，如果不手动释放该内存，在程序退出之前，这一块内存是不会被释放的。</p>
-<p>有人这时候就站出来了，你怎么能这么懒呢，用完释放不就得了吗。我只能说，“猿”非圣贤，咋就不能有个疏忽的地方呢。一旦疏忽就悲剧了，代码逻辑简单的还好，一旦复杂起来，恐怕只有上帝才知道是哪个地方泄露了。都这样了，当然咱们不多说废话了，我来介绍两个专搞内存泄露的工具。</p>
-<p>Windows工具——VisualLeak Detector(VLD)，这货是用在Visual Studio上面的，至于如果你使用MingW之类的我还木有研究过。官方网站是：<a href="http://vld.codeplex.com/" title="http://vld.codeplex.com/">VisualLeak Detector(VLD)</a></p>
-<p>下载下来，安装，把安装目录下面的src目录添加到VisualStudio的include path里面，把lib目录添加到Visual Studio的lib path里面，注意有lib目录有两个分别代表的是x86和x64，这要根据你的工程的配置来选择使用哪一个。好了一切就绪了，我们试一把。</p>
-<p>首先编写一个非常简单的泄露程序，虽然我在一些面试题目上面看到说这个不算内存泄露。</p>
-<div class="code"><pre><span class="vi">#include</span> <span class="o">&lt;</span><span class="nx">iostream</span><span class="o">&gt;</span>
-
-<span class="nx">int</span> <span class="nx">main</span><span class="p">(</span><span class="nx">int</span> <span class="nx">argc</span><span class="p">,</span> <span class="nx">char</span><span class="o">**</span> <span class="nx">argv</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="nx">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nb">new</span> <span class="nx">int</span><span class="err">[</span><span class="mi">10</span><span class="cp">]</span>;
-    return 0;
-}
-</pre></div>
-
-
-<p>使用F5直接调试运行一下，观察output的最后一段：</p>
-<div class="code"><pre><span class="n">WARNING</span><span class="o">:</span> <span class="n">Visual</span> <span class="n">Leak</span> <span class="n">Detector</span> <span class="n">detected</span> <span class="n">memory</span> <span class="n">leaks</span><span class="o">!</span>
-<span class="o">----------</span> <span class="n">Block</span> <span class="mi">1</span> <span class="n">at</span> <span class="mh">0x00379580</span><span class="o">:</span> <span class="mi">40</span> <span class="n">bytes</span> <span class="o">----------</span>
-  <span class="n">Call</span> <span class="n">Stack</span><span class="o">:</span>
-    <span class="n">e</span><span class="o">:\</span><span class="n">projects</span><span class="o">\</span><span class="n">leak</span><span class="o">\</span><span class="n">leak</span><span class="o">\</span><span class="n">source</span><span class="o">.</span><span class="na">cpp</span> <span class="o">(</span><span class="mi">6</span><span class="o">):</span> <span class="n">leak</span><span class="o">.</span><span class="na">exe</span><span class="o">!</span><span class="n">main</span> <span class="o">+</span> <span class="mh">0x7</span> <span class="n">bytes</span>
-    <span class="n">f</span><span class="o">:\</span><span class="n">dd</span><span class="o">\</span><span class="n">vctools</span><span class="o">\</span><span class="n">crt_bld</span><span class="o">\</span><span class="n">self_x86</span><span class="o">\</span><span class="n">crt</span><span class="o">\</span><span class="n">src</span><span class="o">\</span><span class="n">crtexe</span><span class="o">.</span><span class="na">c</span> <span class="o">(</span><span class="mi">536</span><span class="o">):</span> <span class="n">leak</span><span class="o">.</span><span class="na">exe</span><span class="o">!</span><span class="n">__tmainCRTStartup</span> <span class="o">+</span> <span class="mh">0x19</span> <span class="n">bytes</span>
-    <span class="n">f</span><span class="o">:\</span><span class="n">dd</span><span class="o">\</span><span class="n">vctools</span><span class="o">\</span><span class="n">crt_bld</span><span class="o">\</span><span class="n">self_x86</span><span class="o">\</span><span class="n">crt</span><span class="o">\</span><span class="n">src</span><span class="o">\</span><span class="n">crtexe</span><span class="o">.</span><span class="na">c</span> <span class="o">(</span><span class="mi">377</span><span class="o">):</span> <span class="n">leak</span><span class="o">.</span><span class="na">exe</span><span class="o">!</span><span class="n">mainCRTStartup</span>
-    <span class="mh">0x765</span><span class="n">CED6C</span> <span class="o">(</span><span class="n">File</span> <span class="n">and</span> <span class="n">line</span> <span class="n">number</span> <span class="n">not</span> <span class="n">available</span><span class="o">):</span> <span class="n">kernel32</span><span class="o">.</span><span class="na">dll</span><span class="o">!</span><span class="n">BaseThreadInitThunk</span> <span class="o">+</span> <span class="mh">0x12</span> <span class="n">bytes</span>
-    <span class="mh">0x77</span><span class="n">B8377B</span> <span class="o">(</span><span class="n">File</span> <span class="n">and</span> <span class="n">line</span> <span class="n">number</span> <span class="n">not</span> <span class="n">available</span><span class="o">):</span> <span class="n">ntdll</span><span class="o">.</span><span class="na">dll</span><span class="o">!</span><span class="n">RtlInitializeExceptionChain</span> <span class="o">+</span> <span class="mi">0</span><span class="n">xEF</span> <span class="n">bytes</span>
-    <span class="mh">0x77</span><span class="n">B8374E</span> <span class="o">(</span><span class="n">File</span> <span class="n">and</span> <span class="n">line</span> <span class="n">number</span> <span class="n">not</span> <span class="n">available</span><span class="o">):</span> <span class="n">ntdll</span><span class="o">.</span><span class="na">dll</span><span class="o">!</span><span class="n">RtlInitializeExceptionChain</span> <span class="o">+</span> <span class="mi">0</span><span class="n">xC2</span> <span class="n">bytes</span>
-  <span class="n">Data</span><span class="o">:</span>
-    <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span>    <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span>    <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span>    <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span>     <span class="o">........</span> <span class="o">........</span>
-    <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span>    <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span>    <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span>    <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span>     <span class="o">........</span> <span class="o">........</span>
-    <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span>    <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span> <span class="n">CD</span>                                   <span class="o">........</span> <span class="o">........</span>
-
-
-<span class="n">Visual</span> <span class="n">Leak</span> <span class="n">Detector</span> <span class="n">detected</span> <span class="mi">1</span> <span class="n">memory</span> <span class="n">leak</span> <span class="o">(</span><span class="mi">76</span> <span class="n">bytes</span><span class="o">).</span>
-<span class="n">Largest</span> <span class="n">number</span> <span class="n">used</span><span class="o">:</span> <span class="mi">76</span> <span class="n">bytes</span><span class="o">.</span>
-<span class="n">Total</span> <span class="n">allocations</span><span class="o">:</span> <span class="mi">76</span> <span class="n">bytes</span><span class="o">.</span>
-<span class="n">Visual</span> <span class="n">Leak</span> <span class="n">Detector</span> <span class="k">is</span> <span class="n">now</span> <span class="n">exiting</span><span class="o">.</span>
-<span class="n">The</span> <span class="n">program</span> <span class="s1">'[7652] leak.exe'</span> <span class="n">has</span> <span class="n">exited</span> <span class="k">with</span> <span class="n">code</span> <span class="mi">0</span> <span class="o">(</span><span class="mh">0x0</span><span class="o">).</span>
-</pre></div>
-
-
-<p>这里就很明白了把，这个vld工具可以打印出泄露调用的堆栈，双击任意错误处，可以到达错误的地方，e:\projects\leak\leak\source.cpp (6): leak.exe!main + 0x7 bytes双击这句话就定位到了main函数的第六行。哈哈，很方便吧！</p>
-<p>使用Linux的童鞋要鄙视我们了，人家都是命令行的高手，不屑于使用GUI工具，再说也木有Visual Studio，Vim Emacs之类的利器可以秒杀Visual Studio。这时候如何定位泄露的地方呢？现在推出终极杀人魔——valgrind。官网：<a href="http://www.valgrind.org" title="http://www.valgrind.org">valgrind</a></p>
-<p>使用debian和ubuntu的童鞋可以使用apt-get命令安装此软件。</p>
-<p>首先使用gcc的童鞋首先编译的时候加上-g的debug选项，优化最好是使用-o0，然后如果你的程序运行是使用如下的参数方式：</p>
-<div class="code"><pre><span class="n">myprog</span> <span class="n">arg1</span> <span class="n">arg2</span>
-</pre></div>
-
-
-<p>现在就改成下面的方式：</p>
-<div class="code"><pre><span class="n">valgrind</span><span class="o">--</span><span class="n">leak</span><span class="o">-</span><span class="n">check</span><span class="o">=</span><span class="n">yes</span> <span class="n">myprog</span> <span class="n">arg1</span> <span class="n">arg2</span>
-</pre></div>
-
-
-<p>等到程序结束的时候就可以看到泄露的地方啦。（本人Linux菜鸟，没法给大家演示了，不然又要重启进入Linux或者打开卡卡的虚拟机）</p>
-<p>哈哈，到这里了，泄露还是否那么可怕呢。我给大家一张恐怖的泄露截图吧，以供娱乐：</p>
-<p><img alt="image" src="galleries/memory-leak/leak.jpg"></p>
-<p>参考资料：</p>
-<p>[1] <a href="http://bbs.csdn.net/topics/390050717">http://bbs.csdn.net/topics/390050717</a></p>
-<p>[2] <a href="http://vld.codeplex.com/documentation">http://vld.codeplex.com/documentation</a></p>
-<p>[3] <a href="http://www.valgrind.org/docs/manual/quick-start.html#quick-start.mcrun">http://www.valgrind.org/docs/manual/quick-start.html#quick-start.mcrun</a></p>
-            
-        
-    <p>
-        <a href="posts/oh-memory-leak.html#disqus_thread" data-disqus-identifier="cache\posts\oh-memory-leak.html">Comments</a>
-
-
-        </p></div>
     
-<div>
-<ul class="pager">
-</ul>
-</div>
+    <ul class="pager">
+        <li class="previous">
+            <a href="oh-memory-leak.html">← 前一篇</a>
+        </li>
+    </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        var disqus_shortname ="nikolademo";
+            var disqus_url="http://getnikola.com//posts/HEVC-basic-CU-learning.html";
+        var disqus_title="HEVC\u5b66\u4e60\u4e4bCU\u5212\u5206\u5c0f\u5b9e\u9a8c";
+        var disqus_identifier="cache\posts\HEVC-basic-CU-learning.html";
+        var disqus_config = function () {
+            this.language = "zh_cn";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
 
     
-        
-       <script type="text/javascript">var disqus_shortname="nikolademo";(function(){var a=document.createElement("script");a.async=true;a.type="text/javascript";a.src="http://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("HEAD")[0]||document.getElementsByTagName("BODY")[0]).appendChild(a)}());</script>
 
-
-	
-
+    </div>
 
     </div>
     </div>
@@ -377,9 +322,9 @@
     Contents © 2014         <a href="mailto:chengximing1989@gmail.com">程光曦微</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
 </div>
 
-            <script src="assets/js/jquery-1.10.2.min.js" type="text/javascript"></script>
-            <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+            <script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+            <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
 
 
 	

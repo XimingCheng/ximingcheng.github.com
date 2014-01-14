@@ -35,6 +35,16 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://getnikola.com/categories/cu.html</loc>
+  <lastmod>2014-01-14</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://getnikola.com/categories/hevc.html</loc>
+  <lastmod>2014-01-14</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://getnikola.com/categories/index.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
@@ -50,12 +60,27 @@
   <priority>0.5000</priority>
  </url>
  <url>
+  <loc>http://getnikola.com/categories/video-coding.html</loc>
+  <lastmod>2014-01-14</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
   <loc>http://getnikola.com/categories/visualleak-detector.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://getnikola.com/galleries/</loc>
+  <lastmod>2014-01-14</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://getnikola.com/galleries/HEVC-CU/</loc>
+  <lastmod>2014-01-14</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://getnikola.com/galleries/HEVC-CU/index.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
@@ -86,6 +111,11 @@
  </url>
  <url>
   <loc>http://getnikola.com/listings/index.html</loc>
+  <lastmod>2014-01-14</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://getnikola.com/posts/HEVC-basic-CU-learning.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>

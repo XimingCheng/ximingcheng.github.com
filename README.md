@@ -1,4 +1,2 @@
-ximingcheng.github.com
-======================
 
-The open Blog of Ximing Cheng
+The open Blog of Ximing Cheng based on Nikola

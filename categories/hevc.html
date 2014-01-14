@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="description" content="打酱油的码农">
     <meta name="author" content="程光曦微">
-    <title>galleries | 程光曦微</title>
+    <title>文章分类：HEVC | 程光曦微</title>
     
             <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
             <link href="../assets/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
@@ -19,14 +19,7 @@
             <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 
     
-<style type="text/css">
-    .image-block {
-        display: inline-block;
-    }
-    .flowr_row {
-        width: 100%;
-    }
-    </style>
+        <link rel="alternate" type="application/rss+xml" title="RSS for tag HEVC" href="hevc.xml">
 
     
 </head>
@@ -51,9 +44,9 @@
                 <ul class="nav">
                     
                 <li><a href="../archive.html">归档</a>
-                </li><li><a href="../categories/index.html">标签</a>
-                </li><li class="active"><a href="#">图集</a>
-                </li><li class="active"><a href="#">关于作者</a>
+                </li><li><a href="index.html">标签</a>
+                </li><li><a href="../galleries/index.html">图集</a>
+                </li><li><a href="../galleries/index.html">关于作者</a>
                 </li><li><a href="../rss.xml">RSS</a>
 
                 </li></ul>
@@ -73,21 +66,16 @@
     <div class="span2"></div>
     <div class="span8">
     
-    
-<ul class="breadcrumb">
-        <li><a href="#">galleries</a></li>
-</ul>
-
-    <ul>
-        <li><a href="HEVC-CU"><i class="icon-folder-open"></i> HEVC-CU</a></li>
-        <li><a href="memory-leak"><i class="icon-folder-open"></i> memory-leak</a></li>
-    </ul>
-
-    <div id="gallery_container"></div>
-    <noscript>
-    <ul class="thumbnails">
-    </ul>
-    </noscript>
+        <!--Body content-->
+        <div class="postbox">
+        <h1>文章分类：HEVC</h1>
+            <a href="hevc.xml">RSS</a>
+        <br>
+        <ul class="unstyled">
+            <li><a href="../posts/HEVC-basic-CU-learning.html">[2012-12-16 20:36] HEVC学习之CU划分小实验</a>
+        </li></ul>
+        </div>
+        <!--End of body content-->
 
     </div>
     </div>
@@ -125,45 +113,6 @@
     $(document).ready(function(){$(window).trigger('hashchange')});
     </script>
    
-<script src="../assets/js/flowr.plugin.js"></script>
-<script>
-jsonContent = [];
-$("#gallery_container").flowr({
-        data : jsonContent,
-        height : 180*.6,
-        padding: 5,
-        rows: -1,
-        render : function(params) {
-            // Just return a div, string or a dom object, anything works fine
-            img = $("<img />").attr({
-                'src': params.itemData.url_thumb,
-                'width' : params.width,
-                'height' : params.height
-            }).css('max-width', '100%');
-            link = $( "<a></a>").attr({
-                'href': params.itemData.url,
-                'class': 'image-reference'
-            });
-            div = $("<div />").addClass('image-block').attr({
-                'title': params.itemData.title,
-                'data-toggle': "tooltip",
-            });
-            link.append(img);
-            div.append(link);
-            div.hover(div.tooltip());
-            return div;
-        },
-        itemWidth : function(data) { return data.size.w; },
-        itemHeight : function(data) { return data.size.h; },
-        complete : function(params) {
-            if( jsonContent.length > params.renderedItems ) {
-                nextRenderList = jsonContent.slice( params.renderedItems );
-            }
-        }
-    });
-$("a.image-reference").colorbox({rel:"gal", maxWidth:"100%",maxHeight:"100%",scalePhotos:true});
-</script>
-
    
 </body>
 </html>
