@@ -5,157 +5,157 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
-  <loc>http://getnikola.com/</loc>
+  <loc>http://ximingcheng.github.io/</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/2012/</loc>
+  <loc>http://ximingcheng.github.io/2012/</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/2012/index.html</loc>
+  <loc>http://ximingcheng.github.io/2012/index.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/2013/</loc>
+  <loc>http://ximingcheng.github.io/2013/</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/2013/index.html</loc>
+  <loc>http://ximingcheng.github.io/2013/index.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/archive.html</loc>
+  <loc>http://ximingcheng.github.io/archive.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/categories/</loc>
+  <loc>http://ximingcheng.github.io/categories/</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/categories/c.html</loc>
+  <loc>http://ximingcheng.github.io/categories/c.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/categories/cu.html</loc>
+  <loc>http://ximingcheng.github.io/categories/cu.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/categories/github-project.html</loc>
+  <loc>http://ximingcheng.github.io/categories/github-project.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/categories/hevc.html</loc>
+  <loc>http://ximingcheng.github.io/categories/hevc.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/categories/index.html</loc>
+  <loc>http://ximingcheng.github.io/categories/index.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/categories/nei-cun-xie-lu.html</loc>
+  <loc>http://ximingcheng.github.io/categories/nei-cun-xie-lu.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/categories/valgrind.html</loc>
+  <loc>http://ximingcheng.github.io/categories/valgrind.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/categories/video-coding.html</loc>
+  <loc>http://ximingcheng.github.io/categories/video-coding.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/categories/visualleak-detector.html</loc>
+  <loc>http://ximingcheng.github.io/categories/visualleak-detector.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/categories/wxwidgets.html</loc>
+  <loc>http://ximingcheng.github.io/categories/wxwidgets.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/galleries/</loc>
+  <loc>http://ximingcheng.github.io/galleries/</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/galleries/HEVC-CU/</loc>
+  <loc>http://ximingcheng.github.io/galleries/HEVC-CU/</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/galleries/HEVC-CU/index.html</loc>
+  <loc>http://ximingcheng.github.io/galleries/HEVC-CU/index.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/galleries/index.html</loc>
+  <loc>http://ximingcheng.github.io/galleries/index.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/galleries/memory-leak/</loc>
+  <loc>http://ximingcheng.github.io/galleries/memory-leak/</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/galleries/memory-leak/index.html</loc>
+  <loc>http://ximingcheng.github.io/galleries/memory-leak/index.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/galleries/wxWidgets-UI/</loc>
+  <loc>http://ximingcheng.github.io/galleries/wxWidgets-UI/</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/galleries/wxWidgets-UI/index.html</loc>
+  <loc>http://ximingcheng.github.io/galleries/wxWidgets-UI/index.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/index.html</loc>
+  <loc>http://ximingcheng.github.io/index.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/listings/</loc>
+  <loc>http://ximingcheng.github.io/listings/</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/listings/index.html</loc>
+  <loc>http://ximingcheng.github.io/listings/index.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/posts/HEVC-basic-CU-learning.html</loc>
+  <loc>http://ximingcheng.github.io/posts/HEVC-basic-CU-learning.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/posts/oh-memory-leak.html</loc>
+  <loc>http://ximingcheng.github.io/posts/oh-memory-leak.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
-  <loc>http://getnikola.com/posts/wxWidgets-UI.html</loc>
+  <loc>http://ximingcheng.github.io/posts/wxWidgets-UI.html</loc>
   <lastmod>2014-01-14</lastmod>
   <priority>0.5000</priority>
  </url>

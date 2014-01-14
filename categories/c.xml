@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>程光曦微 (C++)</title><link>http://getnikola.com/</link><description>打酱油的码农</description><atom:link href="http://getnikola.com/categories/c.xml" type="application/rss+xml" rel="self"></atom:link><lastBuildDate>Tue, 14 Jan 2014 17:36:05 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>内存泄露，我擦</title><link>http://getnikola.com//posts/oh-memory-leak.html</link><description>&lt;!-- 
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>程光曦微 (C++)</title><link>http://ximingcheng.github.io/</link><description>打酱油的码农</description><atom:link href="http://ximingcheng.github.io/categories/c.xml" type="application/rss+xml" rel="self"></atom:link><lastBuildDate>Tue, 14 Jan 2014 17:49:42 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>内存泄露，我擦</title><link>http://ximingcheng.github.io//posts/oh-memory-leak.html</link><description>&lt;!-- 
 .. link: 
 .. description: 
 .. tags: 内存泄露,C++,VisualLeak Detector,valgrind
@@ -64,8 +64,8 @@
 
 &lt;p&gt;等到程序结束的时候就可以看到泄露的地方啦。（本人Linux菜鸟，没法给大家演示了，不然又要重启进入Linux或者打开卡卡的虚拟机）&lt;/p&gt;
 &lt;p&gt;哈哈，到这里了，泄露还是否那么可怕呢。我给大家一张恐怖的泄露截图吧，以供娱乐：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="image" src="http://getnikola.com//galleries/memory-leak/leak.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/memory-leak/leak.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;参考资料：&lt;/p&gt;
 &lt;p&gt;[1] &lt;a href="http://bbs.csdn.net/topics/390050717"&gt;http://bbs.csdn.net/topics/390050717&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;[2] &lt;a href="http://vld.codeplex.com/documentation"&gt;http://vld.codeplex.com/documentation&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;[3] &lt;a href="http://www.valgrind.org/docs/manual/quick-start.html#quick-start.mcrun"&gt;http://www.valgrind.org/docs/manual/quick-start.html#quick-start.mcrun&lt;/a&gt;&lt;/p&gt;</description><category>内存泄露</category><category>C++</category><category>VisualLeak Detector</category><category>valgrind</category><guid>http://getnikola.com//posts/oh-memory-leak.html</guid><pubDate>Sun, 18 Nov 2012 00:31:01 GMT</pubDate></item></channel></rss>
+&lt;p&gt;[3] &lt;a href="http://www.valgrind.org/docs/manual/quick-start.html#quick-start.mcrun"&gt;http://www.valgrind.org/docs/manual/quick-start.html#quick-start.mcrun&lt;/a&gt;&lt;/p&gt;</description><category>内存泄露</category><category>C++</category><category>VisualLeak Detector</category><category>valgrind</category><guid>http://ximingcheng.github.io//posts/oh-memory-leak.html</guid><pubDate>Sun, 18 Nov 2012 00:31:01 GMT</pubDate></item></channel></rss>

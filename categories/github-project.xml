@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>程光曦微 (Github Project)</title><link>http://getnikola.com/</link><description>打酱油的码农</description><atom:link href="http://getnikola.com/categories/github-project.xml" type="application/rss+xml" rel="self"></atom:link><lastBuildDate>Tue, 14 Jan 2014 17:36:05 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>wxWidgets wxListCtrl与多线程UI更新</title><link>http://getnikola.com//posts/wxWidgets-UI.html</link><description>&lt;p&gt;很久没有编写GUI程序了，还是在本科的时候经常编写MFC程序，现在觉得作为一个IT人士，必须每隔上一段时间学习新的技术，否则会被淘汰。所以，我看了看wxWidgets这个号称跨平台的GUI库。&lt;/p&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>程光曦微 (Github Project)</title><link>http://ximingcheng.github.io/</link><description>打酱油的码农</description><atom:link href="http://ximingcheng.github.io/categories/github-project.xml" type="application/rss+xml" rel="self"></atom:link><lastBuildDate>Tue, 14 Jan 2014 17:49:42 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>wxWidgets wxListCtrl与多线程UI更新</title><link>http://ximingcheng.github.io//posts/wxWidgets-UI.html</link><description>&lt;p&gt;很久没有编写GUI程序了，还是在本科的时候经常编写MFC程序，现在觉得作为一个IT人士，必须每隔上一段时间学习新的技术，否则会被淘汰。所以，我看了看wxWidgets这个号称跨平台的GUI库。&lt;/p&gt;
 &lt;p&gt;主要的目标是实现一个HEVC的码流分析器（&lt;a href="https://github.com/XimingCheng/HEVCAnalyzer"&gt;HEVCAnalyzer&lt;/a&gt;），这是一个长远的目标，估计要花上很长时间才能把功能完善，毕竟是我和一个同学在课余时间开发，而且目前遇到了很多的问题，我把这个星期我这方面遇到的问题总结一下，记录在此。&lt;/p&gt;
 &lt;p&gt;wxWidgets的使用我就不多说了，我的第一个目标就是编写一个YUV分析器，利用到了wxWidgets的AUI布局，下面是我的一个布局的草图：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="image" src="http://getnikola.com//galleries/wxWidgets-UI/design.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/wxWidgets-UI/design.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;关于AUI布局，他是一个高级的布局管理，其中包含的属性Layers, Rows and Directions, Positions可以控制子窗口的位置，官方给了一个例子，效果如下（个别布局被我修改过）&lt;/p&gt;
-&lt;p&gt;&lt;img alt="image" src="http://getnikola.com//galleries/wxWidgets-UI/demo.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/wxWidgets-UI/demo.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;所以我开始给我的项目程序设计了成了这个样子：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="image" src="http://getnikola.com//galleries/wxWidgets-UI/UI1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/wxWidgets-UI/UI1.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;其中左侧是YUV的缩率图列表使用了wxListCrtl，打开之后效果如下：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="image" src="http://getnikola.com//galleries/wxWidgets-UI/UI2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/wxWidgets-UI/UI2.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;其中这里使用了多线程更新UI，主要是因为如果YUV文件过大，打开处理时间过长，用户会感觉UI被卡死。使用线程控制UI更新，但是线程里面不能直接更新UI，目前是使用自定义消息发给父窗口，父窗口处理列表的更新：&lt;/p&gt;
 &lt;p&gt;启动线程：&lt;/p&gt;
 &lt;div class="code"&gt;&lt;pre&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m_pImage_list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -112,7 +112,7 @@
 
 &lt;p&gt;遇到的问题:&lt;/p&gt;
 &lt;p&gt;1 Linux的wxThread估计有问题 ，无法启动线程&lt;/p&gt;
-&lt;p&gt;&lt;img alt="image" src="http://getnikola.com//galleries/wxWidgets-UI/crash.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/wxWidgets-UI/crash.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;解决方法：&lt;/p&gt;
 &lt;p&gt;在wxApp的子类的构造函数添加线程初始化函数 XInitThreads();&lt;/p&gt;
 &lt;div class="code"&gt;&lt;pre&gt;&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;HEVCodecApp&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="n"&gt;wxApp&lt;/span&gt;
@@ -131,5 +131,5 @@
 
 &lt;p&gt;参考 &lt;a href="http://forums.wxwidgets.org/viewtopic.php?t=32346&amp;amp;p=139431"&gt;http://forums.wxwidgets.org/viewtopic.php?t=32346&amp;amp;p=139431&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;2 wxListCtrl在Linux下面显示有问题，无法单列显示列表，这个是wxWidgets 2.8.12的bug，其例子也有这个bug：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="image" src="http://getnikola.com//galleries/wxWidgets-UI/bug.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;我们打算使用wxHTMLListBox来解决这个bug&lt;/p&gt;</description><category>wxWidgets</category><category>HEVC</category><category>Github Project</category><guid>http://getnikola.com//posts/wxWidgets-UI.html</guid><pubDate>Fri, 31 May 2013 20:10:06 GMT</pubDate></item></channel></rss>
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/wxWidgets-UI/bug.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;我们打算使用wxHTMLListBox来解决这个bug&lt;/p&gt;</description><category>wxWidgets</category><category>HEVC</category><category>Github Project</category><guid>http://ximingcheng.github.io//posts/wxWidgets-UI.html</guid><pubDate>Fri, 31 May 2013 20:10:06 GMT</pubDate></item></channel></rss>
