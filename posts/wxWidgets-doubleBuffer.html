@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="zh_cn">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="程光曦微">
+    <title>wxWidgets的双缓存与高级绘图wxGraphicsContext | 程光曦微</title>
+    
+            <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+            <link href="../assets/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/theme.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+    
+
+
+
+    
+</head>
+<body>
+<!-- Menubar -->
+<div class="navbar navbar-fixed-top" id="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+
+            <a class="brand" href="../">
+            程光曦微
+            </a>
+            <!-- Everything you want hidden at 940px or less, place within here -->
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    
+                <li><a href="../archive.html">归档</a>
+                </li><li><a href="../categories/index.html">标签</a>
+                </li><li><a href="../galleries/index.html">图集</a>
+                </li><li><a href="../galleries/index.html">关于作者</a>
+                </li><li><a href="../rss.xml">RSS</a>
+
+                </li></ul>
+                <ul class="nav pull-right">
+                
+                
+                    <li>
+			<a href="wxWidgets-doubleBuffer.md" id="sourcelink">源代码</a>
+		</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Menubar -->
+<div class="container-fluid" id="container-fluid">
+    <!--Body content-->
+    <div class="row-fluid">
+    <div class="span2"></div>
+    <div class="span8">
+    
+    <div class="postbox">
+    
+    <h1>wxWidgets的双缓存与高级绘图wxGraphicsContext</h1>
+
+    <hr>
+    <small>
+        发表于: <time class="published" datetime="2013-06-28T20:40:02">2013-06-28 20:40</time>
+        
+
+		
+          |  更多相关文章：
+            <a class="tag" href="../categories/wxwidgets.html"><span class="badge badge-info">wxWidgets</span></a>
+
+          |  
+		
+    </small>
+    <hr>
+    <!-- 
+.. link: 
+.. description: 
+.. tags: wxWidgets,
+.. date: 2013/06/28 20:40:02
+.. title: wxWidgets的双缓存与高级绘图wxGraphicsContext
+.. slug: wxWidgets-doubleBuffer
+-->
+
+<p>防止绘图的闪烁，终极利器就是使用双缓存来防止闪烁，wxWidgets处理双缓存的类是wxAutoBufferedPaintDC，可以直接处理双缓存而不需要处理太多的问题。</p>
+<div class="code"><pre><span class="kt">void</span> <span class="n">PicViewCtrl</span><span class="o">::</span><span class="n">OnPaint</span><span class="p">(</span><span class="n">wxPaintEvent</span><span class="o">&amp;</span> <span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">wxAutoBufferedPaintDC</span> <span class="n">dc</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">PrepareDC</span><span class="p">(</span><span class="n">dc</span><span class="p">);</span>
+    <span class="n">Render</span><span class="p">(</span><span class="n">dc</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>此时要注意style的设置：</p>
+<div class="code"><pre><span class="n">SetBackgroundStyle</span><span class="p">(</span><span class="n">wxBG_STYLE_CUSTOM</span><span class="p">);</span>
+</pre></div>
+
+
+<p>所有的绘图放在Render(dc);里面，这样可以防止绘图闪烁。</p>
+<p>另外一种方案是自己处理双缓存的函数：</p>
+<div class="code"><pre><span class="k">if</span><span class="p">(</span><span class="n">IsDoubleBuffered</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="n">DrawBackground</span><span class="p">(</span><span class="n">dc</span><span class="p">,</span> <span class="n">xbase</span><span class="p">,</span> <span class="n">ybase</span><span class="p">,</span> <span class="n">xbase</span><span class="o">+</span><span class="n">virtualwidth</span><span class="p">,</span> <span class="n">ybase</span><span class="o">+</span><span class="n">virtualheight</span><span class="p">);</span>
+    <span class="n">DrawGrid</span><span class="p">(</span><span class="n">dc</span><span class="p">,</span> <span class="n">xbase</span><span class="p">,</span> <span class="n">ybase</span><span class="p">,</span> <span class="n">xbase</span><span class="o">+</span><span class="n">virtualwidth</span><span class="p">,</span> <span class="n">ybase</span><span class="o">+</span><span class="n">virtualheight</span><span class="p">);</span>
+    <span class="n">DrawFocusLine</span><span class="p">(</span><span class="n">dc</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">xindexstart</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">xindexend</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">yindexstart</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">yindexend</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">ShowOneCell</span><span class="p">(</span><span class="n">dc</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">wxMemoryDC</span> <span class="n">mdc</span><span class="p">;</span>
+    <span class="n">wxBitmap</span> <span class="n">bm</span> <span class="o">=</span> <span class="n">wxBitmap</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m_iXOffset</span><span class="o">+</span><span class="n">m_iCUWidth</span><span class="o">*</span><span class="n">m_iWidthPerPixel</span><span class="o">+</span><span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">m_iYOffset</span><span class="o">+</span><span class="n">m_iCUHeight</span><span class="o">*</span><span class="n">m_iHeightPerPixel</span><span class="o">+</span><span class="mi">30</span><span class="p">);</span>
+    <span class="n">mdc</span><span class="p">.</span><span class="n">SelectObject</span><span class="p">(</span><span class="n">bm</span><span class="p">);</span>
+    <span class="n">DrawBackground</span><span class="p">(</span><span class="n">mdc</span><span class="p">,</span> <span class="n">xbase</span><span class="p">,</span> <span class="n">ybase</span><span class="p">,</span> <span class="n">xbase</span><span class="o">+</span><span class="n">virtualwidth</span><span class="p">,</span> <span class="n">ybase</span><span class="o">+</span><span class="n">virtualheight</span><span class="p">);</span>
+    <span class="n">DrawGrid</span><span class="p">(</span><span class="n">mdc</span><span class="p">,</span> <span class="n">xbase</span><span class="p">,</span> <span class="n">ybase</span><span class="p">,</span> <span class="n">xbase</span><span class="o">+</span><span class="n">virtualwidth</span><span class="p">,</span> <span class="n">ybase</span><span class="o">+</span><span class="n">virtualheight</span><span class="p">);</span>
+    <span class="n">DrawFocusLine</span><span class="p">(</span><span class="n">mdc</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">xindexstart</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">xindexend</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">yindexstart</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">yindexend</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">ShowOneCell</span><span class="p">(</span><span class="n">mdc</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+    <span class="n">dc</span><span class="p">.</span><span class="n">Blit</span><span class="p">(</span><span class="n">xbase</span><span class="p">,</span> <span class="n">ybase</span><span class="p">,</span> <span class="n">virtualwidth</span><span class="p">,</span> <span class="n">virtualheight</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">mdc</span><span class="p">,</span> <span class="n">xbase</span><span class="p">,</span> <span class="n">ybase</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>wxGraphicsContext是高级绘图组建，在windows下面是GDIplus，支持alpha透明色，wxGraphicsContext使用和wxDC很像，但是想要使用他，在WIN32下需要</p>
+<p>change the wxWidgets-2.8-12 source code setup.h from：</p>
+<div class="code"><pre><span class="c">#ifndef wxUSE_GRAPHICS_CONTEXT</span>
+<span class="c">#define wxUSE_GRAPHICS_CONTEXT 0</span>
+<span class="c">#endif</span>
+</pre></div>
+
+
+<p>To</p>
+<div class="code"><pre><span class="c">#ifndef wxUSE_GRAPHICS_CONTEXT</span>
+<span class="c">#define wxUSE_GRAPHICS_CONTEXT 1</span>
+<span class="c">#endif</span>
+</pre></div>
+
+
+<p>you must set <code>-USE_GDIPLUS=1</code></p>
+<p>wxGraphicsContext的效果：</p>
+<p><img alt="image" src="../galleries/wxWidgets-doubleBuffer/result.jpg"></p>
+    
+    <ul class="pager">
+        <li class="previous">
+            <a href="wxWidgets-Custom-UI.html">← 前一篇</a>
+        </li>
+        <li class="next">
+            <a href="Sublime-Text-2.html">后一篇 →</a>
+        </li>
+    </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        var disqus_shortname ="nikolademo";
+            var disqus_url="http://ximingcheng.github.io//posts/wxWidgets-doubleBuffer.html";
+        var disqus_title="wxWidgets\u7684\u53cc\u7f13\u5b58\u4e0e\u9ad8\u7ea7\u7ed8\u56fewxGraphicsContext";
+        var disqus_identifier="cache\posts\wxWidgets-doubleBuffer.html";
+        var disqus_config = function () {
+            this.language = "zh_cn";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </div>
+
+    </div>
+    </div>
+    <!--End of body content-->
+</div>
+<div class="footerbox">
+    Contents © 2014         <a href="mailto:chengximing1989@gmail.com">程光曦微</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+</div>
+
+            <script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+            <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+
+	
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});
+    $(window).on('hashchange', function(){
+        if (location.hash && $(location.hash)[0]) {
+            $('body').animate({scrollTop: $(location.hash).offset().top - $('#navbar').outerHeight(true)*1.2 }, 1);
+        }
+    });
+    $(document).ready(function(){$(window).trigger('hashchange')});
+    </script>
+   
+   
+</body>
+</html>

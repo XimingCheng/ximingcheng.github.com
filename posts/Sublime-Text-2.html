@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="zh_cn">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="程光曦微">
+    <title>Sublime Text 2 使用心得 | 程光曦微</title>
+    
+            <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+            <link href="../assets/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/theme.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+    
+
+
+
+    
+</head>
+<body>
+<!-- Menubar -->
+<div class="navbar navbar-fixed-top" id="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+
+            <a class="brand" href="../">
+            程光曦微
+            </a>
+            <!-- Everything you want hidden at 940px or less, place within here -->
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    
+                <li><a href="../archive.html">归档</a>
+                </li><li><a href="../categories/index.html">标签</a>
+                </li><li><a href="../galleries/index.html">图集</a>
+                </li><li><a href="../galleries/index.html">关于作者</a>
+                </li><li><a href="../rss.xml">RSS</a>
+
+                </li></ul>
+                <ul class="nav pull-right">
+                
+                
+                    <li>
+			<a href="Sublime-Text-2.md" id="sourcelink">源代码</a>
+		</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Menubar -->
+<div class="container-fluid" id="container-fluid">
+    <!--Body content-->
+    <div class="row-fluid">
+    <div class="span2"></div>
+    <div class="span8">
+    
+    <div class="postbox">
+    
+    <h1>Sublime Text 2 使用心得</h1>
+
+    <hr>
+    <small>
+        发表于: <time class="published" datetime="2013-08-18T21:40:02">2013-08-18 21:40</time>
+        
+
+		
+          |  更多相关文章：
+            <a class="tag" href="../categories/sublime-text-2.html"><span class="badge badge-info">Sublime Text 2</span></a>
+            <a class="tag" href="../categories/plugin.html"><span class="badge badge-info">Plugin</span></a>
+
+          |  
+		
+    </small>
+    <hr>
+    <!-- 
+.. link: 
+.. description: 
+.. tags: Sublime Text 2,Plugin
+.. date: 2013/08/18 21:40:02
+.. title: Sublime Text 2 使用心得
+.. slug: Sublime-Text-2
+-->
+
+<p>Sublime Text 2是一款现代轻量级跨平台文本编辑器，他配置比较方便（相对于Vim和Emacs而言），可定制性较强，插件丰富，更难能可贵的是快捷键和chrome差不多（Ctrl + N 新建标签页 Ctrl + W 关闭当前标签页 Ctrl + Shift + T 打开上一次关闭的文件）。</p>
+<h3>概览</h3>
+<p>主题采用Solarized Dark Color Scheme，侧边栏做过颜色的修饰</p>
+<p><img alt="image" src="../galleries/Sublime-Text-2/1.jpg"></p>
+<h3>侧边栏颜色修改</h3>
+<p>修改此文件%appdata%\Sublime Text 2\Packages\Theme - Default\Default.sublime-theme</p>
+<p>有三处地方要修改</p>
+<div class="code"><pre><span class="p">{</span>
+    <span class="nt">"class"</span><span class="p">:</span> <span class="s2">"sidebar_tree"</span><span class="p">,</span>
+    <span class="nt">"row_padding"</span><span class="p">:</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="nt">"indent"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="nt">"indent_offset"</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
+    <span class="nt">"indent_top_level"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">"layer0.tint"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">41</span><span class="p">],</span>
+    <span class="nt">"layer0.opacity"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="nt">"dark_content"</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}</span><span class="err">,</span>
+
+<span class="p">{</span>
+    <span class="nt">"class"</span><span class="p">:</span> <span class="s2">"sidebar_label"</span><span class="p">,</span>
+    <span class="nt">"color"</span><span class="p">:</span> <span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">],</span>
+    <span class="nt">"font.bold"</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="err">//</span> <span class="p">,</span> <span class="nt">"shadow_color"</span><span class="p">:</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">],</span> <span class="nt">"shadow_offset"</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">}</span><span class="err">,</span>
+
+<span class="p">{</span>
+    <span class="nt">"class"</span><span class="p">:</span> <span class="s2">"sidebar_container"</span><span class="p">,</span>
+    <span class="nt">"layer0.tint"</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    <span class="nt">"layer0.opacity"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="nt">"layer0.draw_center"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">"layer0.inner_margin"</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="nt">"content_margin"</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">}</span><span class="err">,</span>
+</pre></div>
+
+
+<p>layer0.tint color 是JSON的语法，后面的是RGB颜色值，可以改成你喜欢的颜色，上面的是我自己的配置，效果如下：</p>
+<p><img alt="image" src="../galleries/Sublime-Text-2/2.jpg"></p>
+<h3>快速跳转</h3>
+<p>GotoAnything -&gt; Ctrl + P</p>
+<p>这时候会出现这样的子窗口：</p>
+<p><img alt="image" src="../galleries/Sublime-Text-2/3.jpg"></p>
+<p>你可以在任何当前打开的文件下面自由切换，使用@ 开头可以在当前文件中的函数切换</p>
+<p><img alt="image" src="../galleries/Sublime-Text-2/4.jpg"></p>
+<p>使用# 可开头可以在当前文件中多有的符号中切换，</p>
+<p><img alt="image" src="../galleries/Sublime-Text-2/5.jpg"></p>
+<p>使用: 开头加上行号可以在当前的制定行行号切换</p>
+<p><img alt="image" src="../galleries/Sublime-Text-2/6.jpg"></p>
+<h3>文件自动保存</h3>
+<p>在标签页上看到这种叉叉，意味着当前文件是保存过了的，</p>
+<p><img alt="image" src="../galleries/Sublime-Text-2/7.jpg"></p>
+<p>,但是这种叉叉</p>
+<p><img alt="image" src="../galleries/Sublime-Text-2/8.jpg"></p>
+<p>意味着当前文件没有被保存，一旦意外文件关闭会怎么办？是关闭之前弹出提示框？No，直接关闭，下次启动Subime Text会还原出上一次使用该文件时候的状态！</p>
+<h3>安装Package Control</h3>
+<p>这是一段Python代码，使用Ctrl + ~ 调出console，复制下面的代码回车，然后重启：</p>
+<div class="code"><pre><span class="kn">import</span> <span class="nn">urllib2</span><span class="o">,</span><span class="nn">os</span><span class="p">;</span>
+<span class="n">pf</span><span class="o">=</span><span class="s">'Package Control.sublime-package'</span><span class="p">;</span> <span class="n">ipp</span><span class="o">=</span><span class="n">sublime</span><span class="o">.</span><span class="n">installed_packages_path</span><span class="p">();</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">ipp</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ipp</span><span class="p">)</span> <span class="k">else</span> <span class="bp">None</span><span class="p">;</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">install_opener</span><span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">()));</span>
+<span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ipp</span><span class="p">,</span><span class="n">pf</span><span class="p">),</span><span class="s">'wb'</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">'http://sublime.wbond.net/'</span><span class="o">+</span><span class="n">pf</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">' '</span><span class="p">,</span><span class="s">'%20'</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">());</span>
+<span class="k">print</span> <span class="s">'Please restart Sublime Text to finish installation'</span>
+</pre></div>
+
+
+<p>重启Sublime Text之后，查看Preference菜单之下会有一个Package Control的子菜单</p>
+<h3>命令匹配子窗口</h3>
+<p>输入Ctrl + Shift + P，你会发现如下的子窗口，编辑器的所有的命令都会出现在在各子窗口里面，这里可以进行模糊匹配，输入install，你会看到如下效果：</p>
+<p><img alt="image" src="../galleries/Sublime-Text-2/9.jpg"></p>
+<p>选中Package Control install package这个子命令，Sublime Text会列出所有的可用的插件集合（Github网络上的），你可以选择喜欢的安装。</p>
+<h3>我推荐的一些插件</h3>
+<p>Git</p>
+<p>这个插件在Subime Text里面直接集成git命令，使用的确很方便，使用Ctrl + Shift + P，输入Git之后你就知道该怎么搞了。</p>
+<p><img alt="image" src="../galleries/Sublime-Text-2/10.jpg"></p>
+<p>Sublime Code Intel</p>
+<p>Python的自动补全很强大</p>
+<p><img alt="image" src="../galleries/Sublime-Text-2/11.jpg"></p>
+<p>Sublime REPL</p>
+<p>可以在Sublime Text里面直接执行脚本</p>
+<p><img alt="image" src="../galleries/Sublime-Text-2/12.jpg"></p>
+<p>Markdown Preview</p>
+<p>直接在浏览器预览Markdown语法的文件</p>
+    
+    <ul class="pager">
+        <li class="previous">
+            <a href="wxWidgets-doubleBuffer.html">← 前一篇</a>
+        </li>
+    </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        var disqus_shortname ="nikolademo";
+            var disqus_url="http://ximingcheng.github.io//posts/Sublime-Text-2.html";
+        var disqus_title="Sublime Text 2 \u4f7f\u7528\u5fc3\u5f97";
+        var disqus_identifier="cache\posts\Sublime-Text-2.html";
+        var disqus_config = function () {
+            this.language = "zh_cn";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </div>
+
+    </div>
+    </div>
+    <!--End of body content-->
+</div>
+<div class="footerbox">
+    Contents © 2014         <a href="mailto:chengximing1989@gmail.com">程光曦微</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+</div>
+
+            <script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+            <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+
+	
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});
+    $(window).on('hashchange', function(){
+        if (location.hash && $(location.hash)[0]) {
+            $('body').animate({scrollTop: $(location.hash).offset().top - $('#navbar').outerHeight(true)*1.2 }, 1);
+        }
+    });
+    $(document).ready(function(){$(window).trigger('hashchange')});
+    </script>
+   
+   
+</body>
+</html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>程光曦微 (Plugin)</title><link>http://ximingcheng.github.io/</link><description>打酱油的码农</description><atom:link href="http://ximingcheng.github.io/categories/plugin.xml" type="application/rss+xml" rel="self"></atom:link><lastBuildDate>Wed, 15 Jan 2014 15:32:10 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Sublime Text 2 使用心得</title><link>http://ximingcheng.github.io//posts/Sublime-Text-2.html</link><description>&lt;!-- 
+.. link: 
+.. description: 
+.. tags: Sublime Text 2,Plugin
+.. date: 2013/08/18 21:40:02
+.. title: Sublime Text 2 使用心得
+.. slug: Sublime-Text-2
+--&gt;
+
+&lt;p&gt;Sublime Text 2是一款现代轻量级跨平台文本编辑器，他配置比较方便（相对于Vim和Emacs而言），可定制性较强，插件丰富，更难能可贵的是快捷键和chrome差不多（Ctrl + N 新建标签页 Ctrl + W 关闭当前标签页 Ctrl + Shift + T 打开上一次关闭的文件）。&lt;/p&gt;
+&lt;h3&gt;概览&lt;/h3&gt;
+&lt;p&gt;主题采用Solarized Dark Color Scheme，侧边栏做过颜色的修饰&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/Sublime-Text-2/1.jpg"&gt;&lt;/p&gt;
+&lt;h3&gt;侧边栏颜色修改&lt;/h3&gt;
+&lt;p&gt;修改此文件%appdata%\Sublime Text 2\Packages\Theme - Default\Default.sublime-theme&lt;/p&gt;
+&lt;p&gt;有三处地方要修改&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nt"&gt;"class"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"sidebar_tree"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nt"&gt;"row_padding"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="nt"&gt;"indent"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nt"&gt;"indent_offset"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;17&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nt"&gt;"indent_top_level"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nt"&gt;"layer0.tint"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;41&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="nt"&gt;"layer0.opacity"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nt"&gt;"dark_content"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;,&lt;/span&gt;
+
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nt"&gt;"class"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"sidebar_label"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nt"&gt;"color"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;150&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;150&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;150&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="nt"&gt;"font.bold"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+    &lt;span class="err"&gt;//&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;"shadow_color"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;250&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;250&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;250&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="nt"&gt;"shadow_offset"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;,&lt;/span&gt;
+
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nt"&gt;"class"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"sidebar_container"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nt"&gt;"layer0.tint"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="nt"&gt;"layer0.opacity"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nt"&gt;"layer0.draw_center"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nt"&gt;"layer0.inner_margin"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="nt"&gt;"content_margin"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;,&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;layer0.tint color 是JSON的语法，后面的是RGB颜色值，可以改成你喜欢的颜色，上面的是我自己的配置，效果如下：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/Sublime-Text-2/2.jpg"&gt;&lt;/p&gt;
+&lt;h3&gt;快速跳转&lt;/h3&gt;
+&lt;p&gt;GotoAnything -&amp;gt; Ctrl + P&lt;/p&gt;
+&lt;p&gt;这时候会出现这样的子窗口：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/Sublime-Text-2/3.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;你可以在任何当前打开的文件下面自由切换，使用@ 开头可以在当前文件中的函数切换&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/Sublime-Text-2/4.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;使用# 可开头可以在当前文件中多有的符号中切换，&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/Sublime-Text-2/5.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;使用: 开头加上行号可以在当前的制定行行号切换&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/Sublime-Text-2/6.jpg"&gt;&lt;/p&gt;
+&lt;h3&gt;文件自动保存&lt;/h3&gt;
+&lt;p&gt;在标签页上看到这种叉叉，意味着当前文件是保存过了的，&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/Sublime-Text-2/7.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;,但是这种叉叉&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/Sublime-Text-2/8.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;意味着当前文件没有被保存，一旦意外文件关闭会怎么办？是关闭之前弹出提示框？No，直接关闭，下次启动Subime Text会还原出上一次使用该文件时候的状态！&lt;/p&gt;
+&lt;h3&gt;安装Package Control&lt;/h3&gt;
+&lt;p&gt;这是一段Python代码，使用Ctrl + ~ 调出console，复制下面的代码回车，然后重启：&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nn"&gt;os&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;pf&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;'Package Control.sublime-package'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;ipp&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sublime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;installed_packages_path&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;makedirs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ipp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exists&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ipp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;install_opener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;build_opener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ProxyHandler&lt;/span&gt;&lt;span class="p"&gt;()));&lt;/span&gt;
+&lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ipp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;pf&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s"&gt;'wb'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'http://sublime.wbond.net/'&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;pf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;' '&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;'%20'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;'Please restart Sublime Text to finish installation'&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;重启Sublime Text之后，查看Preference菜单之下会有一个Package Control的子菜单&lt;/p&gt;
+&lt;h3&gt;命令匹配子窗口&lt;/h3&gt;
+&lt;p&gt;输入Ctrl + Shift + P，你会发现如下的子窗口，编辑器的所有的命令都会出现在在各子窗口里面，这里可以进行模糊匹配，输入install，你会看到如下效果：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/Sublime-Text-2/9.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;选中Package Control install package这个子命令，Sublime Text会列出所有的可用的插件集合（Github网络上的），你可以选择喜欢的安装。&lt;/p&gt;
+&lt;h3&gt;我推荐的一些插件&lt;/h3&gt;
+&lt;p&gt;Git&lt;/p&gt;
+&lt;p&gt;这个插件在Subime Text里面直接集成git命令，使用的确很方便，使用Ctrl + Shift + P，输入Git之后你就知道该怎么搞了。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/Sublime-Text-2/10.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Sublime Code Intel&lt;/p&gt;
+&lt;p&gt;Python的自动补全很强大&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/Sublime-Text-2/11.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Sublime REPL&lt;/p&gt;
+&lt;p&gt;可以在Sublime Text里面直接执行脚本&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image" src="http://ximingcheng.github.io//galleries/Sublime-Text-2/12.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Markdown Preview&lt;/p&gt;
+&lt;p&gt;直接在浏览器预览Markdown语法的文件&lt;/p&gt;</description><category>Sublime Text 2</category><category>Plugin</category><guid>http://ximingcheng.github.io//posts/Sublime-Text-2.html</guid><pubDate>Sun, 18 Aug 2013 21:40:02 GMT</pubDate></item></channel></rss>
