@@ -1,0 +1,253 @@
+<!DOCTYPE html><html lang="zh_cn">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="程光曦微">
+    <title>wxWidgets自定义绘图控件 | 程光曦微</title>
+    
+            <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+            <link href="../assets/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/theme.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+    
+
+
+
+    
+</head>
+<body>
+<!-- Menubar -->
+<div class="navbar navbar-fixed-top" id="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+
+            <a class="brand" href="../">
+            程光曦微
+            </a>
+            <!-- Everything you want hidden at 940px or less, place within here -->
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    
+                <li><a href="../archive.html">归档</a>
+                </li><li><a href="../categories/index.html">标签</a>
+                </li><li><a href="../galleries/index.html">图集</a>
+                </li><li><a href="../galleries/index.html">关于作者</a>
+                </li><li><a href="../rss.xml">RSS</a>
+
+                </li></ul>
+                <ul class="nav pull-right">
+                
+                
+                    <li>
+			<a href="wxWidgets-Custom-UI.md" id="sourcelink">源代码</a>
+		</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Menubar -->
+<div class="container-fluid" id="container-fluid">
+    <!--Body content-->
+    <div class="row-fluid">
+    <div class="span2"></div>
+    <div class="span8">
+    
+    <div class="postbox">
+    
+    <h1>wxWidgets自定义绘图控件</h1>
+
+    <hr>
+    <small>
+        发表于: <time class="published" datetime="2013-06-08T14:40:02">2013-06-08 14:40</time>
+        
+
+		
+          |  更多相关文章：
+            <a class="tag" href="../categories/wxwidgets.html"><span class="badge badge-info">wxWidgets</span></a>
+
+          |  
+		
+    </small>
+    <hr>
+    <p>有时候系统提供的组件有可能不够你使用，比如我现在面临的显示YUV图像的控件，目前支持的功能是任意尺寸宏块或者CU的鼠标选定，鼠标拖拽确定范围，始终居中显示图片，鼠标滚轮翻页，ctrl加上滚轮放大或者缩小。</p>
+<p>自定义wxControl第一步：</p>
+<div class="code"><pre><span class="n">class</span> <span class="n">PicViewCtrl</span> <span class="o">:</span> <span class="n">public</span> <span class="n">wxControl</span>
+<span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">DECLARE_DYNAMIC_CLASS</span><span class="p">(</span><span class="n">PicViewCtrl</span><span class="p">);</span>
+    <span class="c1">//….</span>
+    <span class="n">DECLARE_EVENT_TABLE</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+
+
+<p>显示YUV图像:</p>
+<div class="code"><pre><span class="kt">void</span> <span class="n">PicViewCtrl</span><span class="o">::</span><span class="n">SetBitmap</span><span class="p">(</span><span class="n">wxBitmap</span> <span class="n">bitmap</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">m_bClearFlag</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="n">m_cViewBitmap</span> <span class="o">=</span> <span class="n">bitmap</span><span class="p">;</span>
+    <span class="n">m_CtrlSize</span><span class="p">.</span><span class="n">SetWidth</span><span class="p">(</span><span class="n">m_dScaleRate</span><span class="o">*</span><span class="n">m_cViewBitmap</span><span class="p">.</span><span class="n">GetWidth</span><span class="p">());</span>
+    <span class="n">m_CtrlSize</span><span class="p">.</span><span class="n">SetHeight</span><span class="p">(</span><span class="n">m_dScaleRate</span><span class="o">*</span><span class="n">m_cViewBitmap</span><span class="p">.</span><span class="n">GetHeight</span><span class="p">());</span>
+    <span class="n">this</span><span class="o">-&gt;</span><span class="n">SetSizeHints</span><span class="p">(</span><span class="n">m_CtrlSize</span><span class="p">);</span>
+    <span class="n">GetParent</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">FitInside</span><span class="p">();</span>
+    <span class="n">Refresh</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>重写OnPaint和OnEraseBkg</p>
+<div class="code"><pre><span class="kt">void</span> <span class="n">PicViewCtrl</span><span class="o">::</span><span class="n">OnPaint</span><span class="p">(</span><span class="n">wxPaintEvent</span><span class="o">&amp;</span> <span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">wxPaintDC</span> <span class="n">dc</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">Render</span><span class="p">(</span><span class="n">dc</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">PicViewCtrl</span><span class="o">::</span><span class="n">OnEraseBkg</span><span class="p">(</span><span class="n">wxEraseEvent</span><span class="o">&amp;</span> <span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">wxClientDC</span><span class="o">*</span> <span class="n">clientDC</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">event</span><span class="p">.</span><span class="n">GetDC</span><span class="p">())</span>
+        <span class="n">clientDC</span> <span class="o">=</span> <span class="n">new</span> <span class="n">wxClientDC</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">wxDC</span><span class="o">*</span> <span class="n">pDC</span> <span class="o">=</span> <span class="n">clientDC</span> <span class="o">?</span> <span class="n">clientDC</span> <span class="o">:</span> <span class="n">event</span><span class="p">.</span><span class="n">GetDC</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">m_bClearFlag</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">pDC</span><span class="o">-&gt;</span><span class="n">Clear</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="n">height</span><span class="p">;</span>
+        <span class="n">wxSize</span> <span class="n">size</span> <span class="o">=</span> <span class="n">GetClientSize</span><span class="p">();</span>
+        <span class="n">wxString</span> <span class="n">s</span><span class="p">;</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">Printf</span><span class="p">(</span><span class="n">_T</span><span class="p">(</span><span class="s">"No picture to show!"</span><span class="p">),</span> <span class="n">size</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+        <span class="n">pDC</span><span class="o">-&gt;</span><span class="n">SetFont</span><span class="p">(</span><span class="o">*</span><span class="n">wxNORMAL_FONT</span><span class="p">);</span>
+        <span class="n">pDC</span><span class="o">-&gt;</span><span class="n">GetTextExtent</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">w</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">height</span><span class="p">);</span>
+        <span class="n">height</span> <span class="o">+=</span> <span class="mi">3</span><span class="p">;</span>
+        <span class="n">pDC</span><span class="o">-&gt;</span><span class="n">SetBrush</span><span class="p">(</span><span class="o">*</span><span class="n">wxTRANSPARENT_BRUSH</span><span class="p">);</span>
+        <span class="n">pDC</span><span class="o">-&gt;</span><span class="n">SetPen</span><span class="p">(</span><span class="o">*</span><span class="n">wxLIGHT_GREY_PEN</span><span class="p">);</span>
+        <span class="n">pDC</span><span class="o">-&gt;</span><span class="n">DrawLine</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+        <span class="n">pDC</span><span class="o">-&gt;</span><span class="n">DrawLine</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">pDC</span><span class="o">-&gt;</span><span class="n">DrawText</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">(</span><span class="n">size</span><span class="p">.</span><span class="n">x</span><span class="o">-</span><span class="n">w</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="p">((</span><span class="n">size</span><span class="p">.</span><span class="n">y</span><span class="o">-</span><span class="p">(</span><span class="n">height</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span><span class="p">));</span>
+        <span class="n">wxBitmap</span><span class="o">::</span><span class="n">CleanUpHandlers</span><span class="p">();</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">pDC</span><span class="o">-&gt;</span><span class="n">SetUserScale</span><span class="p">(</span><span class="n">m_dScaleRate</span><span class="p">,</span> <span class="n">m_dScaleRate</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">m_cViewBitmap</span><span class="p">.</span><span class="n">IsOk</span><span class="p">())</span>
+        <span class="n">pDC</span><span class="o">-&gt;</span><span class="n">DrawBitmap</span><span class="p">(</span><span class="n">m_cViewBitmap</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">clientDC</span><span class="p">)</span>
+        <span class="n">delete</span> <span class="n">clientDC</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Render负责画出选定的矩形方块</p>
+<div class="code"><pre><span class="kt">void</span> <span class="n">PicViewCtrl</span><span class="o">::</span><span class="n">Render</span><span class="p">(</span><span class="n">wxDC</span><span class="o">&amp;</span> <span class="n">dc</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">m_bClearFlag</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">dc</span><span class="p">.</span><span class="n">SetUserScale</span><span class="p">(</span><span class="n">m_dScaleRate</span><span class="p">,</span> <span class="n">m_dScaleRate</span><span class="p">);</span>
+        <span class="n">dc</span><span class="p">.</span><span class="n">SetBrush</span><span class="p">(</span><span class="n">wxBrush</span><span class="p">(</span><span class="n">wxColor</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">128</span><span class="p">)));</span>
+        <span class="n">dc</span><span class="p">.</span><span class="n">DrawRectangle</span><span class="p">(</span><span class="n">m_curLCUStart</span><span class="p">,</span> <span class="n">wxSize</span><span class="p">(</span><span class="n">m_curLCUEnd</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">m_curLCUStart</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">m_curLCUEnd</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">m_curLCUStart</span><span class="p">.</span><span class="n">y</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>在CSDN有关于MFC的两个函数的区别的讨论，现在摘录于下：</p>
+<p>在MFC中任何一个window组件的绘图都是放在这两个member function中在设定上 OnEraseBkgnd()是用来画底图的而OnPaint()是用来画主要对象的</p>
+<p>具体：<a href="http://bbs.csdn.net/topics/320086198">http://bbs.csdn.net/topics/320086198</a></p>
+<p>ctrl加上滚轮放大或者缩小是使用了wxDC的SetUserScale，具体实现可以参考github中的<a href="https://github.com/XimingCheng/HEVCAnalyzer/blob/master/HEVCAnalyzer/PicViewCtrl.cpp">HEVCAnalyzer/PicViewCtrl.cpp</a></p>
+<p>鼠标拖拽确定范围参考这里</p>
+<p><a href="http://forums.wxwidgets.org/viewtopic.php?t=14575&amp;highlight=onmousemove">http://forums.wxwidgets.org/viewtopic.php?t=14575&amp;highlight=onmousemove</a></p>
+<p>最终效果：</p>
+<p><img alt="image" src="../galleries/wxWidgets-Custom-UI/draw1.jpg"></p>
+<p>其中的红色块会随着鼠标的移动而移动，默认设置是64x64大小，鼠标朝着蓝色方向拖动，滚轮会自动滚动，ctrl+滚轮放大缩小</p>
+<p><img alt="image" src="../galleries/wxWidgets-Custom-UI/draw2.jpg"></p>
+<p>出现的问题：</p>
+<p>The background color of the LCU rectangle is solid in Windows(画刷的alpha透明色在WIN32和GTK之下没有效果)，红色矩形应该是半透明的：</p>
+<p><img alt="image" src="../galleries/wxWidgets-Custom-UI/draw3.jpg"></p>
+<p>Mac下面据说没有此问题，屌丝程序员，没有Mac机器测试。</p>
+<p>WIN32后续解决方案：</p>
+<p>The brush of the wxWidgets in Windows without GDIPlus enabled will not support the alpha channel, so rebuild the wxWidgets wxMSW with GDIPlus enabled is needed!</p>
+    
+    <ul class="pager">
+        <li class="previous">
+            <a href="wxWidgets-UI.html">← 前一篇</a>
+        </li>
+    </ul>
+
+        
+        
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        var disqus_shortname ="nikolademo";
+            var disqus_url="http://ximingcheng.github.io//posts/wxWidgets-Custom-UI.html";
+        var disqus_title="wxWidgets\u81ea\u5b9a\u4e49\u7ed8\u56fe\u63a7\u4ef6";
+        var disqus_identifier="cache\posts\wxWidgets-Custom-UI.html";
+        var disqus_config = function () {
+            this.language = "zh_cn";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    
+
+    </div>
+
+    </div>
+    </div>
+    <!--End of body content-->
+</div>
+<div class="footerbox">
+    Contents © 2014         <a href="mailto:chengximing1989@gmail.com">程光曦微</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+</div>
+
+            <script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+            <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+
+	
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});
+    $(window).on('hashchange', function(){
+        if (location.hash && $(location.hash)[0]) {
+            $('body').animate({scrollTop: $(location.hash).offset().top - $('#navbar').outerHeight(true)*1.2 }, 1);
+        }
+    });
+    $(document).ready(function(){$(window).trigger('hashchange')});
+    </script>
+   
+   
+</body>
+</html>
