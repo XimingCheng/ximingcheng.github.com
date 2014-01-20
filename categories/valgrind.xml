@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>程光曦微 (valgrind)</title><link>http://ximingcheng.github.io/</link><description>打酱油的码农</description><atom:link href="http://ximingcheng.github.io/categories/valgrind.xml" type="application/rss+xml" rel="self"></atom:link><lastBuildDate>Wed, 15 Jan 2014 15:30:03 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>内存泄露，我擦</title><link>http://ximingcheng.github.io//posts/oh-memory-leak.html</link><description>&lt;!-- 
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>程光曦微 (valgrind)</title><link>http://ximingcheng.github.io/</link><description>打酱油的码农</description><atom:link href="http://ximingcheng.github.io/categories/valgrind.xml" type="application/rss+xml" rel="self"></atom:link><lastBuildDate>Mon, 20 Jan 2014 10:26:58 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>内存泄露，我擦</title><link>http://ximingcheng.github.io//posts/oh-memory-leak.html</link><description>&lt;!-- 
 .. link: 
 .. description: 
 .. tags: 内存泄露,C++,VisualLeak Detector,valgrind

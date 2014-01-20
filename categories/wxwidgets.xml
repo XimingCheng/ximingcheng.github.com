@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>程光曦微 (wxWidgets)</title><link>http://ximingcheng.github.io/</link><description>打酱油的码农</description><atom:link href="http://ximingcheng.github.io/categories/wxwidgets.xml" type="application/rss+xml" rel="self"></atom:link><lastBuildDate>Wed, 15 Jan 2014 15:30:04 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>wxWidgets的双缓存与高级绘图wxGraphicsContext</title><link>http://ximingcheng.github.io//posts/wxWidgets-doubleBuffer.html</link><description>&lt;!-- 
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>程光曦微 (wxWidgets)</title><link>http://ximingcheng.github.io/</link><description>打酱油的码农</description><atom:link href="http://ximingcheng.github.io/categories/wxwidgets.xml" type="application/rss+xml" rel="self"></atom:link><lastBuildDate>Mon, 20 Jan 2014 10:26:57 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>wxWidgets的双缓存与高级绘图wxGraphicsContext</title><link>http://ximingcheng.github.io//posts/wxWidgets-doubleBuffer.html</link><description>&lt;!-- 
 .. link: 
 .. description: 
 .. tags: wxWidgets,

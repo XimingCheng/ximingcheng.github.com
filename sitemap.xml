@@ -6,212 +6,242 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://ximingcheng.github.io/</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/2012/</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/2012/index.html</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/2013/</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/2013/index.html</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://ximingcheng.github.io/2014/</loc>
+  <lastmod>2014-01-20</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://ximingcheng.github.io/2014/index.html</loc>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/archive.html</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/categories/</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/categories/c.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/categories/cu.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://ximingcheng.github.io/categories/encapsulation.html</loc>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/categories/github-project.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/categories/hevc.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/categories/index.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/categories/nei-cun-xie-lu.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/categories/plugin.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/categories/sublime-text-2.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://ximingcheng.github.io/categories/thread.html</loc>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/categories/valgrind.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/categories/video-coding.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/categories/visualleak-detector.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/categories/wxwidgets.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://ximingcheng.github.io/categories/zthread.html</loc>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/galleries/</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/galleries/HEVC-CU/</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/galleries/HEVC-CU/index.html</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/galleries/Sublime-Text-2/</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/galleries/Sublime-Text-2/index.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/galleries/index.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/galleries/memory-leak/</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/galleries/memory-leak/index.html</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/galleries/wxWidgets-Custom-UI/</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/galleries/wxWidgets-Custom-UI/index.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/galleries/wxWidgets-UI/</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/galleries/wxWidgets-UI/index.html</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/galleries/wxWidgets-doubleBuffer/</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/galleries/wxWidgets-doubleBuffer/index.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/index.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/listings/</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/listings/index.html</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/posts/HEVC-basic-CU-learning.html</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/posts/Sublime-Text-2.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/posts/oh-memory-leak.html</loc>
-  <lastmod>2014-01-14</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/posts/wxWidgets-Custom-UI.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/posts/wxWidgets-UI.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
  <url>
   <loc>http://ximingcheng.github.io/posts/wxWidgets-doubleBuffer.html</loc>
-  <lastmod>2014-01-15</lastmod>
+  <lastmod>2014-01-20</lastmod>
+  <priority>0.5000</priority>
+ </url>
+ <url>
+  <loc>http://ximingcheng.github.io/posts/zthread-source-Win32-thread-encapsulation.html</loc>
+  <lastmod>2014-01-20</lastmod>
   <priority>0.5000</priority>
  </url>
 </urlset>

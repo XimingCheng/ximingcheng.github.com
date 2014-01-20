@@ -1,5 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>程光曦微</title><link>http://ximingcheng.github.io/</link><description>打酱油的码农</description><atom:link href="http://ximingcheng.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><lastBuildDate>Wed, 15 Jan 2014 15:32:10 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Sublime Text 2 使用心得</title><link>http://ximingcheng.github.io//posts/Sublime-Text-2.html</link><description>&lt;!-- 
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>程光曦微</title><link>http://ximingcheng.github.io/</link><description>打酱油的码农</description><atom:link href="http://ximingcheng.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><lastBuildDate>Mon, 20 Jan 2014 16:01:03 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>ZThread源码剖析——Win32线程封装</title><link>http://ximingcheng.github.io//posts/zthread-source-Win32-thread-encapsulation.html</link><description>&lt;h3&gt;ZThread 线程最简使用&lt;/h3&gt;
+&lt;p&gt;想必大家对C++ 03中对线程库的标准支持缺失很是烦恼，C++11出现的时间太晚，ZThread是一个跨平台的线程库，可以使用面向对象的线程模型，API接口设计的很像Java，最简单的实现一个线程莫过于下面的代码：&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="vi"&gt;#include&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;zthread&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;Runnable.h&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="vi"&gt;#include&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;zthread&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="k"&gt;Thread&lt;/span&gt;&lt;span class="bp"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;h&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="vi"&gt;#include&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;iostream&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="nx"&gt;using&lt;/span&gt; &lt;span class="nx"&gt;namespace&lt;/span&gt; &lt;span class="nx"&gt;std&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nx"&gt;using&lt;/span&gt; &lt;span class="nx"&gt;namespace&lt;/span&gt; &lt;span class="nx"&gt;ZThread&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="nb"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;TestRun&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="nf"&gt;Runnable&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="bp"&gt;void&lt;/span&gt; &lt;span class="nb"&gt;run&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;cout&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="s2"&gt;"hello world"&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+
+&lt;span class="bp"&gt;void&lt;/span&gt; &lt;span class="nx"&gt;testfun&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;Thread&lt;/span&gt; &lt;span class="nx"&gt;t0&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;TestRun&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+  &lt;span class="k"&gt;Thread&lt;/span&gt; &lt;span class="nx"&gt;t1&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;TestRun&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nx"&gt;int&lt;/span&gt; &lt;span class="nx"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;int&lt;/span&gt; &lt;span class="nx"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;char&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;argv&lt;/span&gt;&lt;span class="err"&gt;[&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;)
+{
+  testfun();
+  return 0;
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;从上面可以明显的看出，只要实现一个Runnable的继承类，重新实现Runnable的纯虚函数run方法就可以实现出一个简单的线程类。使用的时候创建线程对象然后把自己实现好的对象指针传入进去即可。这个时候线程就可以正常运行，不过没有对线程异常进行捕捉和处理。&lt;/p&gt;
+&lt;h3&gt;Runnable Task的简单初窥&lt;/h3&gt;
+&lt;p&gt;Runnable这个class实现的非常简单，我这里就不详细复述了，他是一个抽象类，实现了一个纯虚函数的接口叫做run，所有的线程处理函数几乎都在这个函数下面大放光彩。&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="n"&gt;virtual&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;ZThread中需要把Runable的对象包装成Task，即任务之说。
+Task的实现是一个智能指针，关于ZThread的智能指针，我以后还会详细分析。
+Task的实现也非常的简单，重要的是它同时提供了仿函数的接口，即重载了()：&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;operator&lt;/span&gt;&lt;span class="p"&gt;()()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;this&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;ThreadOps线程操作&lt;/h3&gt;
+&lt;p&gt;ThreadOps是对线程的一个封装，我这里详细的分析一下ThreadOps的Win32实现：&lt;/p&gt;
+&lt;h4&gt;dispatch&lt;/h4&gt;
+&lt;p&gt;dispatch函数是一个static函数，并且声明的时候标明了stdcall，这个是Win API的常见写法，他的作用是给线程分发任务，作为线程的回调函数来使用。&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;  &lt;span class="c1"&gt;// 线程句柄&lt;/span&gt;
+  &lt;span class="n"&gt;HANDLE&lt;/span&gt; &lt;span class="n"&gt;_hThread&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="c1"&gt;// 线程ID&lt;/span&gt;
+  &lt;span class="n"&gt;DWORD&lt;/span&gt; &lt;span class="n"&gt;_tid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这两个是ThreadOps唯一存在的两个私有的成员属性&lt;/p&gt;
+&lt;h4&gt;self&lt;/h4&gt;
+&lt;p&gt;返回当前线程对应的ThreadOps对象
+代码后面的几个函数例如激活线程对象，判断ThreadOps对象是否对应当前线程，==的重载，优先级读取和设置等等很容易理解，这里就不在说明了。&lt;/p&gt;
+&lt;h4&gt;线程的创建&lt;/h4&gt;
+&lt;p&gt;使用spawn函数创建线程，当然为了保证线程拥有自己独立的全局存储区，Win32下面如果发现可以使用_beginthread和_endthread宏的话，就尽量使用这连个宏来控制线程，_beginthread实际上底层调用的就是CreateThread，但是他给线程封装了更为安全的全局存储区，在你是用一些C语言库函数对一些全局错误标志的修改可以起到一定的保护作用。
+在创建线程的时候，传递dispatch的函数指针作为线程的回调函数，同时传递一个Runnable实例化好的指针作为线程函数的参数。&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="n"&gt;ThreadOps&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;spawn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Runnable&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Start the thread. 创建线程 注意用的是 _beginthreadex 把task作为参数传递进去&lt;/span&gt;
+&lt;span class="cp"&gt;#if defined(HAVE_BEGINTHREADEX)&lt;/span&gt;
+  &lt;span class="n"&gt;_hThread&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HANDLE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;_beginthreadex&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;_dispatch&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;unsigned&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;_tid&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cp"&gt;#else&lt;/span&gt;
+  &lt;span class="n"&gt;_hThread&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CreateThread&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;LPTHREAD_START_ROUTINE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;_dispatch&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DWORD&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;_tid&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cp"&gt;#endif&lt;/span&gt;
+
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;_hThread&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;线程join&lt;/h4&gt;
+&lt;p&gt;线程等待结束使用WaitForSingleObjectEx，使用无限长等待，当等待结束线程句柄被关闭。&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="n"&gt;ThreadOps&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ThreadOps&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;ops&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+  &lt;span class="n"&gt;assert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ops&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="n"&gt;assert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ops&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_tid&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="n"&gt;assert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ops&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_hThread&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+  &lt;span class="c1"&gt;// 等待线程结束&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;WaitForSingleObjectEx&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ops&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_hThread&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;INFINITE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;FALSE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;WAIT_OBJECT_0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+  &lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;CloseHandle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ops&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_hThread&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="n"&gt;ops&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;_hThread&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;线程让步和YieldOps函数对象（仿函数）&lt;/h4&gt;
+&lt;p&gt;线程让步在Windows下面调用SwitchToThread API进行线程让步，但是SwitchToThread属于Platform API，其代码实现被封装在Kernel32.dll中，所以ZThread使用了YieldOps封装了一个仿函数以供外围接口调用。&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="kr"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;YieldOps&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+  &lt;span class="nx"&gt;typedef&lt;/span&gt; &lt;span class="nx"&gt;BOOL&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;Yield&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="k"&gt;void&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="nx"&gt;Yield&lt;/span&gt; &lt;span class="nx"&gt;_fnYield&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// yield函数指针&lt;/span&gt;
+
+&lt;span class="kr"&gt;public&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+
+  &lt;span class="nx"&gt;YieldOps&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;_fnYield&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+    &lt;span class="nx"&gt;OSVERSIONINFO&lt;/span&gt; &lt;span class="nx"&gt;v&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nx"&gt;v&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;dwOSVersionInfoSize&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;sizeof&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;OSVERSIONINFO&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// NT 内核 找到SwitchToThread函数入口&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="nx"&gt;GetVersionEx&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nx"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;v&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;dwPlatformId&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nx"&gt;VER_PLATFORM_WIN32_NT&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+       &lt;span class="nx"&gt;HINSTANCE&lt;/span&gt; &lt;span class="nx"&gt;hInst&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="nx"&gt;GetModuleHandle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Kernel32.dll"&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+       &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;hInst&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="nx"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+         &lt;span class="nx"&gt;_fnYield&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;Yield&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="nx"&gt;GetProcAddress&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;hInst&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"SwitchToThread"&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+       &lt;span class="c1"&gt;// REMIND: possibly need to use _T() macro for these strings&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+  &lt;span class="p"&gt;}&lt;/span&gt;
+
+  &lt;span class="c1"&gt;// 仿函数 括号重载 系统调用失败 尝试用sleep(0)来yield线程&lt;/span&gt;
+  &lt;span class="nx"&gt;bool&lt;/span&gt; &lt;span class="nx"&gt;operator&lt;/span&gt;&lt;span class="p"&gt;()()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Attempt to yield using the best function available&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nx"&gt;_fnYield&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nx"&gt;_fnYield&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt; 
+      &lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="nx"&gt;Sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;  
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+  &lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;实际的ThreadOps::yield()只是初始化了一个静态的static YieldOps yielder：&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="n"&gt;ThreadOps&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;yield&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+  &lt;span class="c1"&gt;// 注意是静态的 只初始化了一次&lt;/span&gt;
+  &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;YieldOps&lt;/span&gt; &lt;span class="n"&gt;yielder&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+  &lt;span class="n"&gt;yielder&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;dispatch虚函数发威&lt;/h4&gt;
+&lt;p&gt;dispatch是类的静态成员，是没有this指针的，同时Win回调函数是不能使用class的成员函数的，所以在spawn函数中传递给了线程回调函数一个Runable指针参数，线程函数直接使用暴力强制类型转换得到正确的Runable对象指针
+后续就是执行run方法，然后是线程资源回收&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// 分配线程任务 线程函数&lt;/span&gt;
+&lt;span class="k"&gt;unsigned&lt;/span&gt; &lt;span class="k"&gt;int&lt;/span&gt; &lt;span class="n"&gt;__stdcall&lt;/span&gt; &lt;span class="n"&gt;ThreadOps&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;_dispatch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+  &lt;span class="c1"&gt;// 参数传递进入 强制类型转化成为线程执行的task&lt;/span&gt;
+  &lt;span class="n"&gt;Runnable&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;task&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;reinterpret_cast&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Runnable&lt;/span&gt;&lt;span class="o"&gt;*&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="k"&gt;assert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;task&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+  &lt;span class="c1"&gt;// Run the task from the correct context&lt;/span&gt;
+  &lt;span class="c1"&gt;// 线程处理函数 执行线程run的虚函数&lt;/span&gt;
+  &lt;span class="k"&gt;task&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+  &lt;span class="c1"&gt;// Exit the thread&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;defined&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;HAVE_BEGINTHREADEX&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;_endthreadex&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;
+  &lt;span class="n"&gt;ExitThread&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;endif&lt;/span&gt;
+
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</description><category>ZThread</category><category>thread</category><category>encapsulation</category><guid>http://ximingcheng.github.io//posts/zthread-source-Win32-thread-encapsulation.html</guid><pubDate>Mon, 20 Jan 2014 10:16:04 GMT</pubDate></item><item><title>Sublime Text 2 使用心得</title><link>http://ximingcheng.github.io//posts/Sublime-Text-2.html</link><description>&lt;!-- 
 .. link: 
 .. description: 
 .. tags: Sublime Text 2,Plugin
